@@ -1,0 +1,10 @@
+﻿ <nav ng-if="pages.length >= 2">
+    <ul class="pagination">
+    <li><a ng-click="selectPage(1)" style="cursor:pointer;"  skip-disable><i class="fa fa-fast-backward"></i></a>
+    </li><li><a ng-click="selectPage(currentPage - 1)"  style="cursor:pointer;"  skip-disable><i class="fa fa-step-backward"></i></a>
+    </li><li><a><page-select></page-select> 
+             {{numPages}}</a>
+    </li><li><a ng-click="selectPage(currentPage + 1)"  style="cursor:pointer;"  skip-disable><i class="fa fa-step-forward"></i></a>
+    </li><li><a ng-click="selectPage(numPages)"  style="cursor:pointer;"  skip-disable><i class="fa fa-fast-forward"></i></a></li>
+    </ul>
+</nav>
