@@ -167,10 +167,22 @@
     <Content Include="images\lightbox\prev.png" />
     <Content Include="images\logo.ico" />
     <Content Include="images\logo_blank.png" />
+    <Content Include="images\menuActivity.png" />
+    <Content Include="images\menuBack.png" />
+    <Content Include="images\menuBrand.png" />
     <Content Include="images\menuConfig.png" />
+    <Content Include="images\menuCustomer.png" />
+    <Content Include="images\menuInventory.png" />
     <Content Include="images\menuMonitor.png" />
     <Content Include="images\menuOperations.png" />
+    <Content Include="images\menuParts.png" />
+    <Content Include="images\menuPurchase.png" />
     <Content Include="images\menuReports.png" />
+    <Content Include="images\menuStock.png" />
+    <Content Include="images\menuTech.png" />
+    <Content Include="images\menuUsers.png" />
+    <Content Include="images\menuVendor.png" />
+    <Content Include="images\menuWorkshop.png" />
     <Content Include="js\angular\angucomplete-alt.js" />
     <Content Include="js\angular\angular-animate.min.js" />
     <Content Include="js\angular\angular-bootstrap-multiselect.js" />
@@ -246,6 +258,7 @@
     <Content Include="js\pages\catalogos\Usuario.js" />
     <Content Include="js\pages\login.js" />
     <Content Include="js\pages\menus\menu.js" />
+    <Content Include="js\pages\operation\Stock.js" />
     <Content Include="js\pages\principal.js" />
     <Content Include="js\pages\reportes\Dashboard.js" />
     <Content Include="js\scripts\jquery-ui-1.9.2.custom.min.js" />
@@ -266,11 +279,18 @@
     <Content Include="pages\catalogos\Usuario.aspx" />
     <Content Include="pages\Error.aspx" />
     <Content Include="pages\Login.aspx" />
+    <Content Include="pages\menus\operations.aspx" />
+    <Content Include="pages\menus\config.aspx" />
     <Content Include="pages\menus\main.aspx" />
+    <Content Include="pages\operation\stock.aspx" />
     <Content Include="pages\Principal.aspx" />
     <Content Include="pages\reportes\Dashboard.aspx" />
     <Content Include="Resources\GlobalResources.res.txt" />
     <Content Include="Resources\pages_catalogos_actividad_aspx.res.txt" />
+    <Content Include="Resources\pages_operation_stock_aspx.res.txt" />
+    <Content Include="Resources\pages_menus_config_aspx.res.txt" />
+    <Content Include="Resources\pages_menus_operations_aspx.res.txt" />
+    <Content Include="Resources\pages_menus_main_aspx.res.txt" />
     <Content Include="Resources\pages_catalogos_usuario_aspx.res.txt" />
     <Content Include="Resources\pages_reportes_dashboard_aspx.res.txt" />
     <Content Include="Templates\pagination.html" />
@@ -357,12 +377,33 @@
     <Compile Include="pages\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="pages\menus\operations.aspx.cs">
+      <DependentUpon>operations.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\menus\operations.aspx.designer.cs">
+      <DependentUpon>operations.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\menus\config.aspx.cs">
+      <DependentUpon>config.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\menus\config.aspx.designer.cs">
+      <DependentUpon>config.aspx</DependentUpon>
+    </Compile>
     <Compile Include="pages\menus\main.aspx.cs">
       <DependentUpon>main.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="pages\menus\main.aspx.designer.cs">
       <DependentUpon>main.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\operation\stock.aspx.cs">
+      <DependentUpon>stock.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\operation\stock.aspx.designer.cs">
+      <DependentUpon>stock.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\Principal.aspx.cs">
       <DependentUpon>Principal.aspx</DependentUpon>
@@ -407,6 +448,7 @@
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\RapidTransportWsm - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\RapidTransportWsm - Web Deploy1.pubxml" />
+    <None Include="Properties\PublishProfiles\turboflow - Web Deploy.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

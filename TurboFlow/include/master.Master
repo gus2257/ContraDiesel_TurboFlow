@@ -4,11 +4,12 @@
 
 <html>
 <head runat="server">
-    <title></title>
+    <title>Turbo Flow</title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
      <link rel="stylesheet" href="../css/font-awesome.min.css" />
     <link rel="icon" href="../images/logo.ico" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
       body.estilo {
             font: 13px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -100,10 +101,10 @@
                         <br /><br />
                     </td>
                     <td style="text-align:right; width:20%">
-                            <b>  <span id="NombreUsuario" runat="server"></span></b>  
+                            <b>  <span id="NombreUsuario" runat="server" class="hidden-xs"></span></b>  
                             &nbsp;&nbsp;
-                         <a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars" style="font-size: 25px"></i></a>
-                         <a id="logout" onclick="SalirAp('<%=ruta%><%=login%>');" href="#" class="hidden-xs"><i class="fa fa-sign-out" style="font-size: 25px"></i></a>
+                         <a href="../menus/main.aspx"><i class="fa fa-bars" style="font-size: 25px"></i></a>
+                         <a id="logout" onclick="SalirAp('<%=ruta%><%=login%>');" href="#"><i class="fa fa-sign-out" style="font-size: 25px"></i></a>
                     </td>
                 </tr>
                 <tr style="height:6px">
@@ -115,7 +116,7 @@
             </table>
             <!--END TOPBAR-->
                 
-            <table style="width:90%;" align="center">
+            <table style="width:100%;" align="center">
                 <tr>
                     <td>
                         <div>

@@ -1,7 +1,9 @@
-﻿Titulo=Turbo Flow - Users
-Module = Users
-MainModule = Configuration
-lblNombre= Name
+﻿Titulo=Turbo Flow - Stock
+Module = Stock
+MainModule = Operation
+
+
+lblCa= Name
 lblApellido = Last Name
 lblLoginName = Login Name
 lblCorreo = Mail

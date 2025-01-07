@@ -1,13 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/include/master.Master" AutoEventWireup="true" CodeBehind="Usuario.aspx.cs" Inherits="WorkShop.pages.catalogos.Usuario" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
 
         <div ng-controller="UsuarioController as usuario">
     <ol class="breadcrumb page-breadcrumb">
         <li><i class="fa fa-tag fa-fw"></i></li>
-        <li><%= this.GetMessage("lblCatalogos") %> &nbsp;</li>
-        <li class="active"><%= this.GetMessage("lblUsuarioAlias") %></li>
+        <li><%= this.GetMessage("MainModule") %> &nbsp;</li>
+        <li class="active"><%= this.GetMessage("Module") %></li>
         <li class="notSlide pull-right margin10"> 
             <a  id="lnkAgregar" href="#">
                  <button class="btn btn-primary btn-xs m-l-sm" id="edit" type="button" ng-click="usuario.nuevo()" ng-hide="usuario.esSoloLectura">
