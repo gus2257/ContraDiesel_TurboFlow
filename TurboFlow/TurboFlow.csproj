@@ -254,6 +254,7 @@
     <Content Include="js\jsGrid\jsgrid.load-indicator.js" />
     <Content Include="js\jsGrid\jsgrid.load-strategies.js" />
     <Content Include="js\jsGrid\jsgrid.sort-strategies.js" />
+    <Content Include="js\pages\filters.js" />
     <Content Include="js\pages\catalogos\Actividad.js" />
     <Content Include="js\pages\catalogos\Usuario.js" />
     <Content Include="js\pages\login.js" />

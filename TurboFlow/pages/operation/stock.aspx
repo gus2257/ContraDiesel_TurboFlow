@@ -11,6 +11,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
 
         <div ng-controller="StockController as stock">
+
         <ol class="breadcrumb page-breadcrumb">
             <li><i class="fa fa-tag fa-fw"></i></li>
             <li><%= this.GetMessage("MainModule") %> &nbsp;</li>
@@ -42,7 +43,7 @@
                                                 Filters <span class="fa fa-filter"></span>
                                             </span>
                                         <div class="hidden-xs SearchParameters" id="SearchParameters">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-2">
                                                  <div class="input">
                                                     <div class="col-lg-12">Category</div>
                                                     <select class="form-control" ng-model="stock.filter.CategoryID"
@@ -58,7 +59,7 @@
                                                     </select>                                                            
                                                 </div>
                                             </div>
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-3">
                                                  <div class="input">
                                                     <div class="col-lg-12">Modelo</div>
                                                     <select class="form-control" ng-model="stock.filter.CategoryID"
@@ -113,26 +114,25 @@
                                             <div id="tabGrouped" class="tab-pane fade in active">
                                                 <div class="row">
                                                      <table style="width: 95%;" class="col-lg-12 table table-condensed table-striped table-hover table-fixed" 
-                                                         st-table="usuario.Usuarios" st-safe-src="usuario.UsuariosAux">
+                                                         st-table="stock.Grouped" st-safe-src="stock.Grouped">
                                                          <thead>
                                                              <tr>
                                                                  <th style="width: 20%">Category</th>
-                                                                 <th style="width: 20%">Brande</th>
+                                                                 <th style="width: 20%">Brand</th>
                                                                  <th style="width: 20%">Sku</th>
                                                                  <th style="width: 20%">Model</th>
-                                                                 <th style="width: 10%">Available</th>
-                                                                 <th style="width: 10%">Hold</th>
+                                                                 <th style="width: 20%">Available</th>
                                                                  
                                                              </tr>
                                                          </thead>
                                                          <tbody style="max-height: 500px">
-                                                             <tr ng-repeat="item in usuario.Usuarios">
-                                                                 <td style="width: 20%">{{item.Nombre}}</td>
-                                                                 <td style="width: 20%">{{item.Apellido}}</td>
-                                                                 <td style="width: 20%">{{item.Correo}}</td>
-                                                                 <td style="width: 10%">{{item.UltimoAcceso}}</td>
-                                                                 <td style="width: 10%">{{item.TipoUsuario}}</td>
-                                                                 <td style="width: 10%">{{item.Estatus}}</td>
+                                                             <tr ng-repeat="item in stock.Grouped">
+                                                                 <td style="width: 20%">{{item.Category}}</td>
+                                                                 <td style="width: 20%">{{item.Brand}}</td>
+                                                                 <td style="width: 20%">{{item.sku}}</td>
+                                                                 <td style="width: 20%">{{item.Model}}</td>
+                                                                 <td style="width: 20%">{{item.Qty}}</td>
+
                                                              </tr>
                                                          </tbody>
                                                          <tfoot>
@@ -145,9 +145,47 @@
                                                      </table>                                                
                                                 </div>
                                             </div>
-                                            <div id="tabDetailed" class="tab-pane fade in active">
+                                            <div id="tabDetailed" class="tab-pane fade">
                                                 <div class="row">
-                                                        tab2
+                                                     <table style="width: 95%;" class="col-lg-12 table table-condensed table-striped table-hover table-fixed" 
+                                                         st-table="stock.List" st-safe-src="stock.List">
+                                                         <thead>
+                                                             <tr>
+                                                                 <th style="width: 15%">Category</th>
+                                                                 <th style="width: 15%">Brand</th>
+                                                                 <th style="width: 15%">Sku</th>
+                                                                 <th style="width: 15%">Model</th>
+                                                                 <th style="width: 15%">Stock ID</th>
+                                                                 <th style="width: 10%">Status</th>
+                                                                 <th style="width: 10%">Last Update</th>
+                                                                 <th style="width: 5%"></th>
+                                                             </tr>
+                                                         </thead>
+                                                         <tbody style="max-height: 500px">
+                                                             <tr ng-repeat="item in stock.List">
+                                                                 <td style="width: 15%">{{item.Category}}</td>
+                                                                 <td style="width: 15%">{{item.Brand}}</td>
+                                                                 <td style="width: 15%">{{item.sku}}</td>
+                                                                 <td style="width: 15%">{{item.Model}}</td>
+                                                                 <td style="width: 15%">{{item.Stock}}</td>
+                                                                 <td style="width: 10%">{{item.StockStatus}}</td>
+                                                                 <td style="width: 10%">{{item.LastUpdate}}</td>
+                                                                 <td style="width: 5%">
+                                                                    <span class="cursor" ng-click="servicio.editar(item)" skip-disable>
+                                                                        <i class="fa fa-eye" style="padding-left: 5px" skip-disable></i>&nbsp; 
+                                                                    </span>
+
+                                                                 </td>
+                                                             </tr>
+                                                         </tbody>
+                                                         <tfoot>
+                                                             <tr>
+                                                                 <td colspan="9" class="text-right" style="padding-bottom: 0">
+                                                                     <div st-pagination="5" st-items-by-page="30" st-template="../../Templates/pagination.html"></div>
+                                                                 </td>
+                                                             </tr>
+                                                         </tfoot>
+                                                     </table>                                                
                                                 </div>
                                             </div>
                                         </div>
@@ -160,8 +198,11 @@
                
             </div>
         </div>
+
+               
      </div>
 
     <script type="text/javascript" language="javascript" src="<%=ruta %>js/pages/operation/Stock.js?V00039"></script>
+    <script type="text/javascript" language="javascript" src="<%=ruta %>js/pages/filters.js?V00039"></script>
 
 </asp:Content>

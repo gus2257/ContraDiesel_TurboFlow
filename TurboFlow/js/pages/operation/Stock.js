@@ -13,19 +13,18 @@
         stock.esSoloLectura = accesoPantalla[0].SoloLectura;
 
         //obtener lista
-        stock.ObtieneUsuarios = function () {
+        stock.LoadStock = function () {
             try {
                 Ex.load(true);
                 var callback = function (response) {
                     Ex.load(false);
-                    usuario.Usuarios = response.d.Usuarios;
-                    usuario.UsuariosAux = response.d.Usuarios;
-                    usuario.Permisos = response.d.Permisos;
-                    usuario.PermisosAux = response.d.Permisos;
+                    stock.Grouped = response.d.StockGrouped;
+                    stock.List = response.d.StockList;
+                   
                     $scope.PermisosIniciales = response.d.Permisos;
-                    usuario.esSoloLectura = accesoPantalla[0].SoloLectura;
+                    stock.esSoloLectura = accesoPantalla[0].SoloLectura;
                 }
-                $Ex.Execute("ObtieneUsuarios", stock.filter, callback);
+                $Ex.Execute("InitLoad", stock.filter, callback);
             } catch (ex) {
                 Ex.mensajes(ex.message);
                 Ex.load(false);
@@ -34,7 +33,7 @@
 
        
 
-        stock.ObtieneUsuarios();
+        stock.LoadStock();
        
 
     }]);
