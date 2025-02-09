@@ -1,0 +1,7 @@
+﻿Titulo=Turbo Flow - Stock
+Module = Stock Kardex
+MainModule = Operation
+
+lblBack = Back
+lblAdd = Add
+

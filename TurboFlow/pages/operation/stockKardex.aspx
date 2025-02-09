@@ -1,0 +1,274 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/include/master.Master" AutoEventWireup="true" CodeBehind="stockKardex.aspx.cs" Inherits="WorkShop.pages.operation.stockKardex
+    " %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style>
+        #SearchParameters.in,
+        #SearchParameters.collapsing {
+            display: block!important;
+        }
+
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
+
+        <div ng-controller="StockController as stock">
+
+        <ol class="breadcrumb page-breadcrumb">
+            <li><i class="fa fa-tag fa-fw"></i></li>
+            <li><%= this.GetMessage("MainModule") %> &nbsp;</li>
+            <li class="active"><%= this.GetMessage("Module") %></li>
+            <li class="notSlide pull-right margin10"> 
+
+                 <a id="lnkBuscar" href="stock.aspx">
+                     <button class="btn btn-primary btn-xs m-l-sm" id="btnBuscar" type="button"  skip-disable>
+                         <i class="fa fa-arrow-left"></i>&nbsp;  <%= this.GetMessage("lblBack") %></button>
+                 </a>
+            </li>
+         </ol>
+    
+        <span style="visibility:hidden">
+        <input type="text" id="valStockID"  />
+            </span>
+        <script>
+
+            document.getElementById("valStockID").value = "<%=StockID %>";
+
+        </script>
+       
+        <div class="page-content" disable-all="stock.esSoloLectura">
+            <div id="Principal">
+                <div class="row wrapper border-bottom white-bg">
+                   
+                        <div class="col-lg-12">
+
+                               
+                                <div class="row">
+                                        <div class="col-lg-1">
+                                         </div>
+                                        <div class="col-lg-5" style="border-style:solid; border-width:2px;">
+                                             <div class="col-lg-12" style="text-align:center; font-weight:bold; font-size:12pt;">
+                                                 Main information
+                                             </div>   
+                                           <div class="col-lg-12">
+                                                    <div class="col-lg-6">
+                                                        Category:
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                         {{ stock.Category }}
+                                                    </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                    <div class="col-lg-6">
+                                                            <div class="col-lg-6">
+                                                            Brand:
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                 {{ stock.Brand }}
+                                                            </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                            <div class="col-lg-6">
+                                                            Model:
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                 {{ stock.Model }}
+                                                            </div>
+                                                    </div>
+                                            </div>
+                                         </div>
+                                        <div class="col-lg-1">
+                                         </div>
+                                        <div class="col-lg-4" style="border-style:solid; border-width:2px;">
+                                            <div class="col-lg-12" style="text-align:right">
+                                               <span class="cursor" ng-click="stock.PrintCode()" skip-disable>
+                                                    <i class="fa fa-print" style="padding-left: 5px" skip-disable></i>&nbsp; 
+                                                </span>
+                                            </div>   
+                                            <div class="row">
+                                                 <div class="col-lg-12"  style="text-align:center; font-weight:bold; font-size:25pt;">
+                                                    {{ stock.StockNum }}
+                                                </div>
+
+                                            </div>
+                                            <div class="row" style="text-align:center; font-weight:bold; font-size:25pt;">&nbsp;</div>
+                                            <div class="row">
+                                                <div class="col-lg-11" style="text-align:center;">
+                                                     <div class="col-lg-6">
+                                                        {{ stock.StockStatus }}
+                                                    </div>
+                                                     <div class="col-lg-6" style="text-align:right;  font-size:8pt;">
+                                                        {{ stock.LastUpdate }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                         <div class="col-lg-1">
+                                         </div>
+                                </div>
+                           
+                                <br /><br />
+                                </div>
+                           
+                             <div class="row">
+                                <div class="col-lg-1">
+                                    </div>
+                            <div class="col-lg-10" style="text-align:center;">
+                                <div class="row" style="text-align:center; font-weight:bold; font-size:14pt;">
+                                        History
+                                </div>
+                                <div class="row" style="text-align:right;">
+                                    <a  id="lnkAgregar" href="#">
+                                         <button class="btn btn-primary btn-xs m-l-sm" id="edit" type="button" ng-click="stock.NewHistory(0)" ng-hide="stock.esSoloLectura">
+                                             <i class="fa fa-plus"></i>&nbsp; <%= this.GetMessage("lblAdd") %></button>
+                                     </a>   
+                                </div>                               
+                                <div class="row">
+                                        <div class="col-lg-12"  style="text-align:center">
+                                  
+                                        <table style="width: 100%; align-content:left" class="table table-condensed table-striped table-hover table-fixed" 
+                                            st-table="stock.Grouped"  >
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 10%; text-align:center">Date</th>
+                                                    <th style="width: 10%; text-align:center">Activity</th>
+                                                    <th style="width: 20%; text-align:center">Customer / Vendor</th>
+                                                    <th style="width: 15%; text-align:center">Unit Ref</th>
+                                                    <th style="width: 25%; text-align:center">Notes</th>
+                                                    <th style="width: 15%; text-align:center">Changed by</th>  
+                                                    <th style="width: 5%; text-align:center"></th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody style="max-height: 500px">
+                                                <tr ng-repeat="item in stock.History">
+                                                    <td style="width: 10%">{{item.AuditDateShort}}</td>
+                                                    <td style="width: 10%">{{item.StockActivity}}</td>
+                                                    <td style="width: 20%">{{item.Customer}}</td>
+                                                    <td style="width: 15%">{{item.UnitRef}}</td>
+                                                    <td style="width: 25%">{{item.NotesShort}}</td>
+                                                    <td style="width: 15%">{{item.UserName}}</td>
+                                                    <td style="width: 5%">
+                                                    <span class="cursor" ng-click="stock.NewHistory(item)" skip-disable>
+                                                        <i class="fa fa-eye" style="padding-left: 5px" skip-disable></i>&nbsp; 
+                                                    </span>
+
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="9" class="text-right" style="padding-bottom: 0">
+                                                        <div st-pagination="5" st-items-by-page="30" st-template="../../Templates/pagination.html"></div>
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table> 
+                                            </div>
+                                </div>
+                            </div>
+                               <div class="col-lg-1">
+                                    </div>
+                            </div>
+                            </div>
+ 
+
+                 </div>
+               
+
+        <div id="modal-long" tabindex="-1" data-replace="true" class="modal fade" data-backdrop="static" data-keyboard="false">
+        <div ng-form="stock.Form" ng-class="{'submitted': stock.SetClassSummitValid()}">
+            <div class="modal-dialog modal-wide-med" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" data-dismiss="modal" aria-hidden="true"
+                            class="close" skip-disable>
+                            &times;</button>
+                        <h4>New activity</h4>
+
+                    </div>
+                    <div class="modal-body">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="col-lg-10">
+                                        <div class="col-lg-12">Activity</div>
+                                         <select class="form-control" ng-model="stock.form.StockActivityID"
+                                            ng-options="StockActivity.StockActivityID as StockActivity.StockActivity for StockActivity in stock.StockActivity"  required>
+                                          </select>     
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="col-lg-10" ng-show="stock.form.StockActivityID == 10">
+                                        <div class="col-lg-12">Applies warranty:</div>
+                                         <input type="checkbox" ng-model="stock.form.Warranty" numeric-type="integer" numeric="true">
+                                      </div>
+                                </div>
+                            </div>
+                            <div class="row" ng-show="stock.form.StockActivityID != 30">
+                                 <div class="col-lg-4">
+                                  <div class="col-lg-10">
+                                        <div class="col-lg-12">Customer / vendor:</div>
+                                         <input  type="text" class="form-control"  ng-model="stock.form.Customer" maxlength="50" ng-required="stock.form.StockActivityID != 30" />
+                                      </div>
+                                </div>
+                                 <div class="col-lg-4">
+                                  <div class="col-lg-10">
+                                        <div class="col-lg-12">Contact name:</div>
+                                         <input  type="text" class="form-control"  ng-model="stock.form.ContactName" maxlength="50" ng-required="stock.form.StockActivityID != 30" />
+                                      </div>
+                                </div>
+                                 <div class="col-lg-4">
+                                  <div class="col-lg-10">
+                                        <div class="col-lg-12">Unit ref:</div>
+                                         <input  type="text" class="form-control"  ng-model="stock.form.UnitRef" maxlength="50"  />
+                                      </div>
+                                </div>
+                            </div>
+                            <div class="row" ng-show="stock.form.StockActivityID != 30">
+                                 <div class="col-lg-4">
+                                  <div class="col-lg-10">
+                                        <div class="col-lg-12">Contact phone:</div>
+                                         <input  type="text" class="form-control"  ng-model="stock.form.ContactPhone" maxlength="50" ng-required="stock.form.StockActivityID != 30"  />
+                                      </div>
+                                </div>
+                                 <div class="col-lg-4">
+                                  <div class="col-lg-10">
+                                        <div class="col-lg-12">Contact email:</div>
+                                         <input  type="text" class="form-control"  ng-model="stock.form.ContactEmail" maxlength="50" ng-pattern="emailPattern"  />
+                                      </div>
+                                </div>
+                            </div>
+                             <div class="row">
+                             <div class="col-lg-12">
+                                     <div class="col-lg-12">Notes:</div>
+                                       <textarea ng-model="stock.form.Notes" rows="4" cols="100" ng-required="stock.form.StockActivityID == 30" ></textarea>
+                                   </div>
+                             </div>
+                            <div class="row">
+                            <div class="col-lg-12">
+                                    
+                                      By: {{stock.historyBy}}
+                                      Date: {{stock.historyDate}}
+                            </div>
+                             </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="green btn btn-success btn-radius big-input" ng-click="stock.Save()" ng-hide ="stock.esSoloLectura">
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+            </div>
+        </div>
+
+               
+     </div>
+
+    <script type="text/javascript" language="javascript" src="<%=ruta %>js/pages/operation/StockKardex.js?V00039"></script>
+
+   
+</asp:Content>

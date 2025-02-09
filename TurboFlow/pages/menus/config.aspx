@@ -59,7 +59,7 @@
                                     <div style="font-size:15pt; color:black; padding:10px;">Parts</div>
                                 </div>
                                 <div class="col-lg-4 col-md-6">
-                                    <a href="menuConfig.aspx">
+                                    <a href="../catalogos/brandmodel.aspx">
                                     <img class="hover" src="../../images/menuBrand.png" style="width:150px; height:150px;" /></a><br />
                                     <div style="font-size:15pt; color:black; padding:10px;">Brand & Models</div>
                                 </div>

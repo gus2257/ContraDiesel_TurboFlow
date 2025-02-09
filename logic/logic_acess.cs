@@ -187,6 +187,8 @@ namespace logic
                 strTimeOffset = HttpContext.Current.Session["TimeOffset"].ToString();
             parameters["TimeZoneOffSet"] = strTimeOffset;
 
+            parameters["UserId"] = HttpContext.Current.Session["UserId"] == null ? "1" : HttpContext.Current.Session["UserId"].ToString();
+
             BasePage basePage = new BasePage();
             using (SqlConnection connection = new SqlConnection(logic_acces.conexionString))
             {
@@ -217,10 +219,6 @@ namespace logic
                                     parameter1.Value = (object)basePage.NombrePcMod;
                                 if (str.ToLower() == "idioma")
                                     parameter1.Value = HttpContext.Current.Session["Idioma"] == null ? (object)"Spanish" : HttpContext.Current.Session["Idioma"];
-                                if (str.ToLower() == "ubicacionid")
-                                    parameter1.Value = HttpContext.Current.Session["ubicacionId"] == null ? (object)"0" : HttpContext.Current.Session["ubicacionId"];
-                                if (str.ToLower() == "auditusuarioid")
-                                    parameter1.Value = HttpContext.Current.Session["UserId"] == null ? (object)0 : HttpContext.Current.Session["UserId"];
                             }
                         }
                     }
@@ -252,6 +250,9 @@ namespace logic
             if (HttpContext.Current.Session["TimeOffset"] != null)
                 strTimeOffset = HttpContext.Current.Session["TimeOffset"].ToString();
             parameters["TimeZoneOffSet"] = strTimeOffset;
+
+
+            parameters["UserId"] = HttpContext.Current.Session["UserId"] == null ? "1" : HttpContext.Current.Session["UserId"].ToString();
 
             BasePage basePage = new BasePage();
             using (SqlConnection connection = new SqlConnection(logic_acces.conexionString))
@@ -285,11 +286,7 @@ namespace logic
                                     parameter1.Value = (object)basePage.NombrePcMod;
                                 if (str.ToLower() == "idioma")
                                     parameter1.Value = HttpContext.Current.Session["Idioma"] == null ? (object)"Spanish" : HttpContext.Current.Session["Idioma"];
-                                if (str.ToLower() == "ubicacionid")
-                                    parameter1.Value = HttpContext.Current.Session["ubicacionId"] == null ? (object)"0" : HttpContext.Current.Session["ubicacionId"];
-                                if (str.ToLower() == "auditusuarioid")
-                                    parameter1.Value = HttpContext.Current.Session["UserId"] == null ? (object)0 : HttpContext.Current.Session["UserId"];
-                            }
+                           }
                         }
                     }
                     command.ExecuteNonQuery();

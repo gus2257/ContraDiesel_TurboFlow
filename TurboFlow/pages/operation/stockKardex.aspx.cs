@@ -20,30 +20,32 @@ using Newtonsoft.Json;
 
 namespace WorkShop.pages.operation
 {
-    public partial class stock : BasePage
+    public partial class stockKardex : BasePage
     {
         public string ruta = string.Empty;
         private static BasePage Base = new BasePage();
+        public string StockID = "";
 
         protected void Page_Load(object sender, EventArgs e)
         {
             this.ruta = this.URL;
             this.PermisoID = 12;
+
+            StockID = Request.QueryString["StockID"].ToString();
         }
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod]
-        public static Dictionary<string, object> InitLoad(Dictionary<string, string> datos)
+        public static Dictionary<string, object> LoadDropdowns(Dictionary<string, string> datos)
         {
+
             BasePage basePage = new BasePage();
             logic_acces logicAcces = new logic_acces(BasePage.ConexionDB);
             Dictionary<string, object> dictionary = new Dictionary<string, object>();
-            DataSet ds = logicAcces.ExecuteQuery("Stock_Filters", datos);
+            DataSet ds = logicAcces.ExecuteQuery("StockKardex_Dropdowns", datos);
 
-            dictionary["Category"] = (object)basePage.DataTableToMap(ds.Tables[0]);
-            dictionary["Brand"] = (object)basePage.DataTableToMap(ds.Tables[1]);
-            dictionary["Model"] = (object)basePage.DataTableToMap(ds.Tables[2]);
-            dictionary["StockStatus"] = (object)basePage.DataTableToMap(ds.Tables[3]);
+            dictionary["StockActivity"] = (object)basePage.DataTableToMap(ds.Tables[0]);
+            
 
             return dictionary;
         }
@@ -53,42 +55,48 @@ namespace WorkShop.pages.operation
         [ScriptMethod]
         public static Dictionary<string, object> StockLoad(Dictionary<string, string> datos)
         {
+
             BasePage basePage = new BasePage();
             logic_acces logicAcces = new logic_acces(BasePage.ConexionDB);
             Dictionary<string, object> dictionary = new Dictionary<string, object>();
-            DataSet ds = logicAcces.ExecuteQuery("Stock_Inventory", datos);
+            DataSet ds = logicAcces.ExecuteQuery("StockKardex_Get", datos);
 
+            DataTable dt = ds.Tables[0];
 
+            if (ds.Tables[0].Rows.Count > 0)
+            {
 
-            dictionary["StockGrouped"] = (object)basePage.DataTableToMap(ds.Tables[0]);
-            dictionary["StockList"] = (object)basePage.DataTableToMap(ds.Tables[1]);
+                dictionary["Category"] = dt.Rows[0]["Category"].ToString();
+                dictionary["StockNum"] = dt.Rows[0]["StockNum"].ToString();
+                dictionary["Brand"] = dt.Rows[0]["Brand"].ToString();
+                dictionary["Model"] = dt.Rows[0]["ModelName"].ToString();
+                dictionary["StockStatus"] = dt.Rows[0]["StockStatus"].ToString();
+                dictionary["LastUpdate"] = dt.Rows[0]["LastUpdate"].ToString();
+
+                dictionary["History"] = (object)basePage.DataTableToMap(ds.Tables[1]);
+            }
 
             return dictionary;
         }
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod]
-        public static Dictionary<string, string> StockSave(Dictionary<string, string> datos)
+        public static string StockHistorySave(Dictionary<string, string> datos)
         {
-            Dictionary<string, string> result = new Dictionary<string, string>();
-            
+            string result = "";
             try
             {
                 BasePage val = new BasePage();
                 logic_acces val2 = new logic_acces(BasePage.ConexionDB);
-                
+                List<Dictionary<string, string>> list = new List<Dictionary<string, string>>();
                 ArrayList arrayList = new ArrayList();
                 TransactionScope val3 = new TransactionScope();
                 try
                 {
-                    val2.ExecuteNonQuery("Stock_UI", datos);
+                    val2.ExecuteNonQuery("StockHistory_UI", datos);
 
                     val3.Complete();
-
-                    result["Result"] = "OK";
-                    result["StockID"] = datos["StockID"];
-
-
+                    result = "OK";
                 }
                 finally
                 {
@@ -99,29 +107,12 @@ namespace WorkShop.pages.operation
             }
             catch (Exception ex)
             {
-                result["Result"] = "ERROR";
-                result["Message"] = ex.Message;
+                result = ex.Message;
             }
 
             return result;
         }
 
-        [WebMethod(EnableSession = true)]
-        [ScriptMethod]
-        public static Dictionary<string, object> LoadDrops(Dictionary<string, string> datos)
-        {
-            BasePage basePage = new BasePage();
-            logic_acces logicAcces = new logic_acces(BasePage.ConexionDB);
-            Dictionary<string, object> dictionary = new Dictionary<string, object>();
-            DataSet ds = logicAcces.ExecuteQuery("Stock_DropDowns", datos);
-
-            dictionary["Category"] = (object)basePage.DataTableToMap(ds.Tables[0]);
-            dictionary["Brand"] = (object)basePage.DataTableToMap(ds.Tables[1]);
-            dictionary["Model"] = (object)basePage.DataTableToMap(ds.Tables[2]);
-           
-
-            return dictionary;
-        }
 
     }
 }

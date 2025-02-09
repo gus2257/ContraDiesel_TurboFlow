@@ -18,9 +18,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Newtonsoft.Json;
 
-namespace WorkShop.pages.operation
+namespace WorkShop.pages.catalogos
 {
-    public partial class stock : BasePage
+    public partial class brandmodel : BasePage
     {
         public string ruta = string.Empty;
         private static BasePage Base = new BasePage();
@@ -28,40 +28,48 @@ namespace WorkShop.pages.operation
         protected void Page_Load(object sender, EventArgs e)
         {
             this.ruta = this.URL;
-            this.PermisoID = 12;
+            this.PermisoID = 13;
         }
+
+
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod]
-        public static Dictionary<string, object> InitLoad(Dictionary<string, string> datos)
+        public static Dictionary<string, object> BrandLoad(Dictionary<string, string> datos)
         {
             BasePage basePage = new BasePage();
             logic_acces logicAcces = new logic_acces(BasePage.ConexionDB);
             Dictionary<string, object> dictionary = new Dictionary<string, object>();
-            DataSet ds = logicAcces.ExecuteQuery("Stock_Filters", datos);
+            DataSet ds = logicAcces.ExecuteQuery("StockBrand_Get", datos);
 
-            dictionary["Category"] = (object)basePage.DataTableToMap(ds.Tables[0]);
-            dictionary["Brand"] = (object)basePage.DataTableToMap(ds.Tables[1]);
-            dictionary["Model"] = (object)basePage.DataTableToMap(ds.Tables[2]);
-            dictionary["StockStatus"] = (object)basePage.DataTableToMap(ds.Tables[3]);
+            dictionary["Brands"] = (object)basePage.DataTableToMap(ds.Tables[0]);
 
             return dictionary;
         }
 
-
         [WebMethod(EnableSession = true)]
         [ScriptMethod]
-        public static Dictionary<string, object> StockLoad(Dictionary<string, string> datos)
+        public static Dictionary<string, object> ModelLoad(Dictionary<string, string> datos)
         {
             BasePage basePage = new BasePage();
             logic_acces logicAcces = new logic_acces(BasePage.ConexionDB);
             Dictionary<string, object> dictionary = new Dictionary<string, object>();
-            DataSet ds = logicAcces.ExecuteQuery("Stock_Inventory", datos);
+            DataSet ds = logicAcces.ExecuteQuery("StockModel_Get", datos);
 
+            dictionary["Models"] = (object)basePage.DataTableToMap(ds.Tables[0]);
 
+            return dictionary;
+        }
 
-            dictionary["StockGrouped"] = (object)basePage.DataTableToMap(ds.Tables[0]);
-            dictionary["StockList"] = (object)basePage.DataTableToMap(ds.Tables[1]);
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod]
+        public static Dictionary<string, object> LoadInit(Dictionary<string, string> datos)
+        {
+            BasePage basePage = new BasePage();
+            logic_acces logicAcces = new logic_acces(BasePage.ConexionDB);
+            Dictionary<string, object> dictionary = new Dictionary<string, object>();
+            DataSet ds = logicAcces.ExecuteQuery("StockCategory_Sel", datos);
+            dictionary["Categories"] = (object)basePage.DataTableToMap(ds.Tables[0]);
 
             return dictionary;
         }
@@ -106,22 +114,6 @@ namespace WorkShop.pages.operation
             return result;
         }
 
-        [WebMethod(EnableSession = true)]
-        [ScriptMethod]
-        public static Dictionary<string, object> LoadDrops(Dictionary<string, string> datos)
-        {
-            BasePage basePage = new BasePage();
-            logic_acces logicAcces = new logic_acces(BasePage.ConexionDB);
-            Dictionary<string, object> dictionary = new Dictionary<string, object>();
-            DataSet ds = logicAcces.ExecuteQuery("Stock_DropDowns", datos);
-
-            dictionary["Category"] = (object)basePage.DataTableToMap(ds.Tables[0]);
-            dictionary["Brand"] = (object)basePage.DataTableToMap(ds.Tables[1]);
-            dictionary["Model"] = (object)basePage.DataTableToMap(ds.Tables[2]);
-           
-
-            return dictionary;
-        }
 
     }
 }

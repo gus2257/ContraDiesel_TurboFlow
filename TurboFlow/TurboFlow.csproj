@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -94,11 +93,6 @@
     </Reference>
     <Reference Include="Microsoft.AspNet.FriendlyUrls">
       <HintPath>..\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -254,11 +248,13 @@
     <Content Include="js\jsGrid\jsgrid.load-indicator.js" />
     <Content Include="js\jsGrid\jsgrid.load-strategies.js" />
     <Content Include="js\jsGrid\jsgrid.sort-strategies.js" />
+    <Content Include="js\pages\catalogos\BrandModel.js" />
     <Content Include="js\pages\filters.js" />
     <Content Include="js\pages\catalogos\Actividad.js" />
     <Content Include="js\pages\catalogos\Usuario.js" />
     <Content Include="js\pages\login.js" />
     <Content Include="js\pages\menus\menu.js" />
+    <Content Include="js\pages\operation\StockKardex.js" />
     <Content Include="js\pages\operation\Stock.js" />
     <Content Include="js\pages\principal.js" />
     <Content Include="js\pages\reportes\Dashboard.js" />
@@ -277,17 +273,21 @@
     <Content Include="js\workshop\util.js" />
     <Content Include="pages\Acceso.aspx" />
     <Content Include="pages\catalogos\Actividad.aspx" />
+    <Content Include="pages\catalogos\BrandModel.aspx" />
     <Content Include="pages\catalogos\Usuario.aspx" />
     <Content Include="pages\Error.aspx" />
     <Content Include="pages\Login.aspx" />
     <Content Include="pages\menus\operations.aspx" />
     <Content Include="pages\menus\config.aspx" />
     <Content Include="pages\menus\main.aspx" />
+    <Content Include="pages\operation\stockKardex.aspx" />
     <Content Include="pages\operation\stock.aspx" />
     <Content Include="pages\Principal.aspx" />
     <Content Include="pages\reportes\Dashboard.aspx" />
     <Content Include="Resources\GlobalResources.res.txt" />
     <Content Include="Resources\pages_catalogos_actividad_aspx.res.txt" />
+    <Content Include="Resources\pages_operation_stockkardex_aspx.res.txt" />
+    <Content Include="Resources\pages_catalogos_brandmodel_aspx.res.txt" />
     <Content Include="Resources\pages_operation_stock_aspx.res.txt" />
     <Content Include="Resources\pages_menus_config_aspx.res.txt" />
     <Content Include="Resources\pages_menus_operations_aspx.res.txt" />
@@ -357,6 +357,13 @@
     <Compile Include="pages\catalogos\Actividad.aspx.designer.cs">
       <DependentUpon>Actividad.aspx</DependentUpon>
     </Compile>
+    <Compile Include="pages\catalogos\BrandModel.aspx.cs">
+      <DependentUpon>BrandModel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\catalogos\BrandModel.aspx.designer.cs">
+      <DependentUpon>BrandModel.aspx</DependentUpon>
+    </Compile>
     <Compile Include="pages\catalogos\Usuario.aspx.cs">
       <DependentUpon>Usuario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -398,6 +405,13 @@
     </Compile>
     <Compile Include="pages\menus\main.aspx.designer.cs">
       <DependentUpon>main.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\operation\stockKardex.aspx.cs">
+      <DependentUpon>stockKardex.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\operation\stockKardex.aspx.designer.cs">
+      <DependentUpon>stockKardex.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\operation\stock.aspx.cs">
       <DependentUpon>stock.aspx</DependentUpon>
@@ -492,12 +506,6 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -18,11 +18,11 @@
             <li class="active"><%= this.GetMessage("Module") %></li>
             <li class="notSlide pull-right margin10"> 
                 <a  id="lnkAgregar" href="#">
-                     <button class="btn btn-primary btn-xs m-l-sm" id="edit" type="button" ng-click="usuario.nuevo()" ng-hide="usuario.esSoloLectura">
+                     <button class="btn btn-primary btn-xs m-l-sm" id="edit" type="button" ng-click="stock.New()" ng-hide="stock.esSoloLectura">
                          <i class="fa fa-plus"></i>&nbsp; <%= this.GetMessage("lblAgregar") %></button>
                  </a>
                  <a id="lnkBuscar" href="#">
-                     <button class="btn btn-primary btn-xs m-l-sm" id="btnBuscar" type="button" ng-click="usuario.buscar()" skip-disable>
+                     <button class="btn btn-primary btn-xs m-l-sm" id="btnBuscar" type="button" ng-click="stock.Search()" skip-disable>
                          <i class="fa fa-search"></i>&nbsp;  <%= this.GetMessage("lblBuscar") %></button>
                  </a>
             </li>
@@ -47,23 +47,23 @@
                                                  <div class="input">
                                                     <div class="col-lg-12">Category</div>
                                                     <select class="form-control" ng-model="stock.filter.CategoryID"
-                                                            ng-options="Category.CategoryID as TipoUsuario.NombreTipoUsuario for TipoUsuario in usuario.TipoUsuario" ng-change="usuario.CambiarTipoUsuario()" required>
+                                                            ng-options="Category.CategoryID as Category.Category for Category in stock.Category" ng-change="stock.ReloadFilters()">
                                                     </select>                                                            
                                                 </div>
                                             </div>
                                             <div class="col-sm-3">
                                                  <div class="input">
-                                                    <div class="col-lg-12">Marca</div>
-                                                    <select class="form-control" ng-model="stock.filter.CategoryID"
-                                                            ng-options="Category.CategoryID as TipoUsuario.NombreTipoUsuario for TipoUsuario in usuario.TipoUsuario" ng-change="usuario.CambiarTipoUsuario()" required>
+                                                    <div class="col-lg-12">Brand</div>
+                                                    <select class="form-control" ng-model="stock.filter.BrandID"
+                                                            ng-options="Brand.BrandID as Brand.Brand for Brand in stock.Brand" ng-change="stock.ReloadFilters()">
                                                     </select>                                                            
                                                 </div>
                                             </div>
                                             <div class="col-sm-3">
                                                  <div class="input">
-                                                    <div class="col-lg-12">Modelo</div>
-                                                    <select class="form-control" ng-model="stock.filter.CategoryID"
-                                                            ng-options="Category.CategoryID as TipoUsuario.NombreTipoUsuario for TipoUsuario in usuario.TipoUsuario" ng-change="usuario.CambiarTipoUsuario()" required>
+                                                    <div class="col-lg-12">Model</div>
+                                                    <select class="form-control" ng-model="stock.filter.ModelID"
+                                                            ng-options="Model.ModelID as Model.ModelName for Model in stock.Model" ng-change="stock.ReloadFilters()">
                                                     </select>                                                            
                                                 </div>
                                             </div>
@@ -71,34 +71,18 @@
                                                 <div class="input">
                                                     <div class="col-lg-12">Stock ID</div>
                                                     <input placeholder="00000" type="text" class="form-control"
-                                                        ng-model="stock.filter.StockID" maxlength="50" allow-pattern="\d+" key-enter="stock.Seach()" />
+                                                        ng-model="stock.filter.StockNum" maxlength="6" allow-pattern="\d+" key-enter="stock.Search()" />
                                                 </div>
                                             </div>
                                             <div class="col-sm-2">
                                                  <div class="input">
-                                                    <div class="col-lg-12">Estatus</div>
-                                                    <select class="form-control" ng-model="stock.filter.CategoryID"
-                                                            ng-options="Category.CategoryID as TipoUsuario.NombreTipoUsuario for TipoUsuario in usuario.TipoUsuario" ng-change="usuario.CambiarTipoUsuario()" required>
+                                                    <div class="col-lg-12">Status</div>
+                                                    <select class="form-control" ng-model="stock.filter.StockStatusID"
+                                                            ng-options="StockStatus.StockStatusID as StockStatus.StockStatus for StockStatus in stock.StockStatus">
                                                     </select>                                                            
                                                 </div>
                                             </div>
                                         </div>
-                                        </div>
-                                    
-                                        <div class="col-sm-2 hidden-xs" style="border-style:solid; border-width:1px; height:100%; border-spacing:5px">
-                                             <div class="input">
-                                                    <table width="100%">
-                                                        <tr>
-                                                            <td>Inventario:</td><td>0</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Hold:</td><td>0</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Cliente:</td><td>0</td>
-                                                        </tr>
-                                                    </table>                                                        
-                                            </div>
                                         </div>
                                 </div>
 
@@ -117,17 +101,17 @@
                                                          st-table="stock.Grouped" st-safe-src="stock.Grouped">
                                                          <thead>
                                                              <tr>
-                                                                 <th style="width: 20%">Category</th>
+                                                                 <th class="hidden-xs" style="width: 20%">Category</th>
                                                                  <th style="width: 20%">Brand</th>
                                                                  <th style="width: 20%">Sku</th>
                                                                  <th style="width: 20%">Model</th>
-                                                                 <th style="width: 20%">Available</th>
+                                                                 <th style="width: 20%">Qty</th>
                                                                  
                                                              </tr>
                                                          </thead>
                                                          <tbody style="max-height: 500px">
                                                              <tr ng-repeat="item in stock.Grouped">
-                                                                 <td style="width: 20%">{{item.Category}}</td>
+                                                                 <td class="hidden-xs" style="width: 20%">{{item.Category}}</td>
                                                                  <td style="width: 20%">{{item.Brand}}</td>
                                                                  <td style="width: 20%">{{item.sku}}</td>
                                                                  <td style="width: 20%">{{item.Model}}</td>
@@ -151,27 +135,27 @@
                                                          st-table="stock.List" st-safe-src="stock.List">
                                                          <thead>
                                                              <tr>
-                                                                 <th style="width: 15%">Category</th>
+                                                                 <th class="hidden-xs" style="width: 15%">Category</th>
                                                                  <th style="width: 15%">Brand</th>
-                                                                 <th style="width: 15%">Sku</th>
-                                                                 <th style="width: 15%">Model</th>
+                                                                 
+                                                                 <th style="width: 20%">Model</th>
                                                                  <th style="width: 15%">Stock ID</th>
                                                                  <th style="width: 10%">Status</th>
-                                                                 <th style="width: 10%">Last Update</th>
+                                                                 <th class="hidden-xs" style="width: 10%">Last Update</th>
                                                                  <th style="width: 5%"></th>
                                                              </tr>
                                                          </thead>
                                                          <tbody style="max-height: 500px">
                                                              <tr ng-repeat="item in stock.List">
-                                                                 <td style="width: 15%">{{item.Category}}</td>
+                                                                 <td class="hidden-xs" style="width: 15%">{{item.Category}}</td>
                                                                  <td style="width: 15%">{{item.Brand}}</td>
-                                                                 <td style="width: 15%">{{item.sku}}</td>
-                                                                 <td style="width: 15%">{{item.Model}}</td>
-                                                                 <td style="width: 15%">{{item.Stock}}</td>
+                                                                
+                                                                 <td style="width: 20%">{{item.ModelName}}</td>
+                                                                 <td style="width: 15%">{{item.StockNum}}</td>
                                                                  <td style="width: 10%">{{item.StockStatus}}</td>
-                                                                 <td style="width: 10%">{{item.LastUpdate}}</td>
+                                                                 <td class="hidden-xs" style="width: 10%">{{item.LastUpdate}}</td>
                                                                  <td style="width: 5%">
-                                                                    <span class="cursor" ng-click="servicio.editar(item)" skip-disable>
+                                                                    <span class="cursor" ng-click="stock.Kardex(item)" skip-disable>
                                                                         <i class="fa fa-eye" style="padding-left: 5px" skip-disable></i>&nbsp; 
                                                                     </span>
 
@@ -196,6 +180,71 @@
 
                  </div>
                
+
+        <div id="modal-long" tabindex="-1" data-replace="true" class="modal fade" data-backdrop="static" data-keyboard="false">
+        <div ng-form="stock.Form" ng-class="{'submitted': stock.SetClassSummitValid()}">
+            <div class="modal-dialog modal-wide-med" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" data-dismiss="modal" aria-hidden="true"
+                            class="close" skip-disable>
+                            &times;</button>
+                        <h4>New Core</h4>
+
+                    </div>
+                    <div class="modal-body">
+                        <div class="ibox-content">
+                             <div class="row">
+                                     <div class="col-lg-12">
+                                     <div class="col-lg-12">Stock ID:</div>
+                                       <input type="text" ng-model="stock.form.StockNum" ng-value="0" numeric-type="integer" numeric="true" required allow-pattern="\d+" />
+                                         <span style="text-decoration-color:gray;">Type "0" for new stock number</span>
+                                   </div>
+                             </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="col-lg-10">
+                                        <div class="col-lg-12">Category</div>
+                                         <select class="form-control" ng-model="stock.form.CategoryID"
+                                            ng-options="Category.CategoryID as Category.Category for Category in stock.CategoryFrm" ng-change="stock.LoadDrops(1)" required>
+                                          </select>     
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="col-lg-10">
+                                        <div class="col-lg-12">Brand:</div>
+                                         <select class="form-control" ng-model="stock.form.BrandID"
+                                            ng-options="Brand.BrandID as Brand.Brand for Brand in stock.BrandFrm"  ng-change="stock.LoadDrops(2)" required>
+                                          </select> 
+                                      </div>
+                                </div>
+                                 <div class="col-lg-4">
+                                  <div class="col-lg-10">
+                                        <div class="col-lg-12">Model:</div>
+                                         <select class="form-control" ng-model="stock.form.ModelID"
+                                            ng-options="Model.ModelID as Model.ModelName for Model in stock.ModelFrm" required>
+                                          </select>
+                                      </div>
+                                </div>
+                               
+                            </div>
+                             <div class="row">
+                             <div class="col-lg-12">
+                                     <div class="col-lg-12">Notes:</div>
+                                       <textarea ng-model="stock.form.Notes" rows="4" cols="100"></textarea>
+                                   </div>
+                             </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="green btn btn-success btn-radius big-input" ng-click="stock.Save()" ng-hide ="stock.esSoloLectura">
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
             </div>
         </div>
 
@@ -203,6 +252,5 @@
      </div>
 
     <script type="text/javascript" language="javascript" src="<%=ruta %>js/pages/operation/Stock.js?V00039"></script>
-    <script type="text/javascript" language="javascript" src="<%=ruta %>js/pages/filters.js?V00039"></script>
 
 </asp:Content>
