@@ -1,0 +1,33 @@
+﻿Titulo=Turbo Flow - Repairs
+Module = Repairs
+MainModule = Operation
+
+
+lblCa= Name
+lblApellido = Last Name
+lblLoginName = Login Name
+lblCorreo = Mail
+lblUltimaVez = Last Access
+lblEstatus = Status
+lblAutorizar = Authorizer
+lblUbicacion = Location
+lblSoloLectura = Read Only
+lblEditar = Edit
+lblContasenia = Password
+lblLongitudContrasenia=The minimum length is 8.
+lblEsActivo = Active
+lblAgregar = Add
+lblBuscar = Search
+lblExportar = Export
+lblEliminar = Delete
+lblCerrar = Close
+lblGuardar = Save
+lblTabUsuario=User
+lblSeleccionar=All
+lblTipoUsuario=User Type
+lblMailInvalido=Please input a valid email.
+lblContraseniaInvalida=Password must contain at least one number
+MsgEliminarExitoUsuario = User Has been successfully deleted
+MsgGuardarUsuario = Successfully Saved
+lblPagina = Page
+MsjPaginaDefault = You can not set the page as default if you do not have permissions to display the screen

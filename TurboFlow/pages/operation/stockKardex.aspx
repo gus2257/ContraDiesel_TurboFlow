@@ -50,12 +50,12 @@
                                                  Main information
                                              </div>   
                                            <div class="col-lg-12">
-                                                    <div class="col-lg-6">
-                                                        Category:
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                         {{ stock.Category }}
-                                                    </div>
+                                                <div class="col-lg-3">
+                                                    Category:
+                                                </div>
+                                                <div class="col-lg-3">
+                                                        {{ stock.Category }}
+                                                </div>
                                             </div>
                                             <div class="col-lg-12">
                                                     <div class="col-lg-6">

@@ -42,7 +42,7 @@
             }
         };
 
-        brandmodel.Edit = function (item) {
+        brandmodel.BrandEdit = function (item) {
 
             brandmodel.Form.isValid = true;
             
@@ -58,7 +58,7 @@
             $('#modal-long').modal('show');
         };
 
-        brandmodel.New = function () {
+        brandmodel.BrandNew = function () {
 
             brandmodel.Form.isValid = true;
             // stock.form = {};
@@ -79,13 +79,14 @@
             else
                 return false;
         };
-        brandmodel.Save = function () {
+        brandmodel.BrandSave = function () {
             try {
                 Ex.load(true);
 
-
+                brandmodel.form.models = brandmodel.Models;
+                brandmodel.modelsqty = brandmodel.Models.length;
             
-                $Ex.Execute("StockSave", brandmodel.form, function (response, isInvalid) {
+                $Ex.Execute("BrandSave", brandmodel.form, function (response, isInvalid) {
 
                     if (isInvalid) {
                         brandmodel.Form.isValid = false;
@@ -94,12 +95,13 @@
                     }
 
                     if (response.d.Result == "OK") {
-                        alert(Ex.GetResourceValue("MsgGuardarUsuario"));
-                        location.replace("StockKardex.aspx?StockID=" + response.d.StockID);
+                        Ex.mensajes("Brand & Models saved successfully", 4);
+
+                        brandmodel.LoadBrands();
 
                         //stock.LoadStock();
                         //Ex.mensajes(Ex.GetResourceValue("MsgGuardarUsuario"), 4);
-                        //$('#modal-long').modal('hide');
+                        $('#modal-long').modal('hide');
                     }
                     else {
                         Ex.mensajes(response.d.Message);
@@ -184,7 +186,7 @@
 
         brandmodel.ModelConfirmDelete = function (item) {
             try {
-                $scope.itemModelo = brandmodel.Models.indexOf(item);
+                $scope.itemModelo = item;
                 Ex.mensajes("Delete model?", 2, null, null, null, brandmodel.ModelDelete, function () { });
             } catch (ex) {
                 Ex.mensajes(ex.message);
@@ -194,7 +196,30 @@
 
         brandmodel.ModelDelete = function (index, item) {
 
-            brandmodel.Models.remove($scope.itemModelo);
+            try {
+
+                Ex.load(false);
+                var params = {};
+                params.BrandID = $scope.itemModelo.BrandID;
+                params.ModelID = $scope.itemModelo.ModelID;
+
+                var index = brandmodel.Models.indexOf($scope.itemModelo);
+
+                var callback = function (response) {
+                    if (response.d.Result == 'OK') {
+                        Ex.load(false);
+                        brandmodel.LoadModels();
+                    }
+                    else
+                        Ex.mensajes(response.d.Message);
+                }
+
+                $Ex.Execute("ModelDelete", params, callback);
+
+            } catch (ex) {
+                Ex.mensajes(ex.message);
+                Ex.load(false);
+            }
 
         };
 

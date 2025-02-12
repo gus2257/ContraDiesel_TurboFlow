@@ -21,7 +21,7 @@ using System.Data.SqlClient;
 
 namespace WorkShop.pages.operation
 {
-    public partial class stock : BasePage
+    public partial class repairs : BasePage
     {
         public string ruta = string.Empty;
         private static BasePage Base = new BasePage();
@@ -29,7 +29,7 @@ namespace WorkShop.pages.operation
         protected void Page_Load(object sender, EventArgs e)
         {
             this.ruta = this.URL;
-            this.PermisoID = 12;
+            this.PermisoID = 14;
         }
 
         [WebMethod(EnableSession = true)]

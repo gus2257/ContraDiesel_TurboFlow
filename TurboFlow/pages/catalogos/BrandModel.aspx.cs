@@ -17,6 +17,7 @@ using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Newtonsoft.Json;
+using System.Data.SqlClient;
 
 namespace WorkShop.pages.catalogos
 {
@@ -76,7 +77,7 @@ namespace WorkShop.pages.catalogos
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod]
-        public static Dictionary<string, string> StockSave(Dictionary<string, string> datos)
+        public static Dictionary<string, string> BrandSave(Dictionary<string, string> datos)
         {
             Dictionary<string, string> result = new Dictionary<string, string>();
             
@@ -84,17 +85,76 @@ namespace WorkShop.pages.catalogos
             {
                 BasePage val = new BasePage();
                 logic_acces val2 = new logic_acces(BasePage.ConexionDB);
-                
-                ArrayList arrayList = new ArrayList();
+
+                //  datos["models"] = datos["models"].Replace("\"\"", "\"");
+
+                List<Dictionary<string, string>> objModels = brandmodel.Base.Deserialize(datos["models"]);
+
+                //datos["models"].Remove();
+
+
+                // datos["models"].Replace(":true,", ":1,").Replace(":false,", ":1,");
+
+
+
+
                 TransactionScope val3 = new TransactionScope();
                 try
                 {
-                    val2.ExecuteNonQuery("Stock_UI", datos);
+                    val2.ExecuteNonQuery("StockBrand_UI", datos);
+
+                    for (int i = 0; i < objModels.Count; i++)
+                    {
+                        val2.ExecuteNonQuery("StockModel_UI", objModels[i]);
+                    }
+                    
+
+
 
                     val3.Complete();
 
                     result["Result"] = "OK";
-                    result["StockID"] = datos["StockID"];
+ 
+                }
+                finally
+                {
+                    ((IDisposable)val3)?.Dispose();
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                result["Result"] = "ERROR";
+                result["Message"] = ex.Message;
+            }
+
+            return result;
+        }
+
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod]
+        public static Dictionary<string, string> ModelDelete(Dictionary<string, string> datos)
+        {
+            Dictionary<string, string> result = new Dictionary<string, string>();
+
+            try
+            {
+                BasePage val = new BasePage();
+                logic_acces val2 = new logic_acces(BasePage.ConexionDB);
+
+     
+
+                ArrayList arrayList = new ArrayList();
+                TransactionScope val3 = new TransactionScope();
+                try
+                {
+                    val2.ExecuteNonQuery("StockModel_Del", datos);
+
+                    val3.Complete();
+
+                    result["Result"] = "OK";
 
 
                 }
@@ -104,6 +164,14 @@ namespace WorkShop.pages.catalogos
                 }
 
 
+            }
+            catch (SqlException ex)
+            {
+                result["Result"] = "ERROR";
+                if (ex.Number == 547)
+                    result["Message"] = "Model is in use";
+                else
+                    result["Message"] = ex.Message;
             }
             catch (Exception ex)
             {

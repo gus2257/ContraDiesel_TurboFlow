@@ -11,7 +11,7 @@
             <li class="active"><%= this.GetMessage("Module") %></li>
             <li class="notSlide pull-right margin10"> 
                 <a  id="lnkAgregar" href="#">
-                     <button class="btn btn-primary btn-xs m-l-sm" id="edit" type="button" ng-click="brandmodel.New()" ng-hide="stock.esSoloLectura">
+                     <button class="btn btn-primary btn-xs m-l-sm" id="edit" type="button" ng-click="brandmodel.BrandNew()" ng-hide="stock.esSoloLectura">
                          <i class="fa fa-plus"></i>&nbsp; <%= this.GetMessage("lblAgregar") %></button>
                  </a>
             </li>
@@ -42,7 +42,7 @@
                                                     <input type="checkbox" ng-model="item.Active" ng-checked="{{item.Active}}" value="{{item.Active}}" disabled /> 
                                                 </td>
                                                 <td style="width: 10%">
-                                                    <span class="cursor" ng-click="brandmodel.Edit(item)" title="Edit" skip-disable> 
+                                                    <span class="cursor" ng-click="brandmodel.BrandEdit(item)" title="Edit" skip-disable> 
                                                         <i class="fa fa-pencil-square-o" style="padding-left: 5px"  skip-disable></i> 
                                                             
                                                     </span>
@@ -163,7 +163,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="green btn btn-success btn-radius big-input" ng-click="brandmodel.Save()" ng-hide ="brandmodel.esSoloLectura">
+                        <button type="button" class="green btn btn-success btn-radius big-input" ng-click="brandmodel.BrandSave()" ng-hide ="brandmodel.esSoloLectura">
                             Save
                         </button>
                     </div>
