@@ -15,10 +15,10 @@
         $scope.emailPattern = /^([A-Za-z0-9._%+-])+@([A-Za-z0-9-])+\.(([A-Za-z]{2,4})+((\.([A-Za-z]{2,4}))?))$/;
 
         // UEN
-        usuario.ubicacion = [];
-        usuario.ubicacionSelected = [];
-        usuario.ubicacionMultiSelectedConfiguration = {
-            displayProp: 'NombreUbicacion', idProp: 'UbicacionID', enableSearch: false,
+        usuario.behavior = [];
+        usuario.behaiviorSelected = [];
+        usuario.behaviorMultiSelectedConfiguration = {
+            displayProp: 'Profile', idProp: 'ProfileID', enableSearch: false,
             scrollableHeight: '220px', scrollable: true, buttonClasses: 'btn btn-multiselect',
             showCheckAll: true, showUncheckAll: true
         };
@@ -58,7 +58,7 @@
 
         //agregar un nuevo atributo
         usuario.nuevo = function () {
-            usuario.ubicacionSelected = [];
+            usuario.behaviorSelected = [];
             usuario.Form.isValid = true;
             usuario.form = {};
             usuario.form.UsuarioID = 0;
@@ -93,11 +93,11 @@
                     usuario.form = response.d.Usuarios[0];
                     usuario.Permisos = response.d.Permisos;
                     usuario.PermisosAux = response.d.Permisos;
-                    usuario.ubicacion = response.d.Ubicacion;
+                    usuario.Behavior = response.d.Behavior;
                     usuario.opcionSoloLectura = false;
                     usuario.opcionEditar = false;
                     // Selected
-                    usuario.ubicacionSelected = response.d.ubicacionSelected;
+                    usuario.behaviorSelected = response.d.BehaviorSelected;
 
                     $('#modal-long').modal('show');
                 });
@@ -151,7 +151,8 @@
 
                 usuario.Datos = listaPermisos;
                 usuario.form.listaPermisos = usuario.Datos;
-                usuario.form.ubicacionList = usuario.ubicacionSelected;
+                usuario.form.behaviorList = usuario.behaviorSelected;
+               
                 $Ex.Execute("GuardarUsuarios", usuario.form, function (response, isInvalid) {
 
                     if (isInvalid) {

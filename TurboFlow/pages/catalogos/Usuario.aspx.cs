@@ -39,11 +39,17 @@ namespace WorkShop.pages.catalogos
             BasePage basePage = new BasePage();
             logic_acces logicAcces = new logic_acces(BasePage.ConexionDB);
             Dictionary<string, object> dictionary = new Dictionary<string, object>();
-            DataTable table1 = logicAcces.ExecuteQuery("Usuario_Sel", datos).Tables[0];
+            DataSet ds = logicAcces.ExecuteQuery("Usuario_Sel", datos);
+
+            DataTable table1 = ds.Tables[0];
+            DataTable table2 = ds.Tables[1];
             DataTable table3 = logicAcces.ExecuteQuery("UsuarioPermiso_Sel", datos).Tables[0];
+            DataTable table4 = logicAcces.ExecuteQuery("Profile_Get", datos).Tables[0];
 
             dictionary["Usuarios"] = (object)basePage.DataTableToMap(table1);
+            dictionary["BehaviorSelected"] = (object)basePage.DataTableToMap(table2);
             dictionary["Permisos"] = (object)basePage.DataTableToMap(table3);
+            dictionary["Behavior"] = (object)basePage.DataTableToMap(table4);
 
             return dictionary;
         }
@@ -79,6 +85,21 @@ namespace WorkShop.pages.catalogos
                             datos["Editar"] = ((val4[i].Editar == null) ? "" : Convert.ToString(val4[i].Editar.Value));
                             datos["EsPredeterminado"] = ((val4[i].EsPredeterminado == null) ? "" : Convert.ToString(val4[i].EsPredeterminado.Value));
                             val2.ExecuteNonQuery("UsuarioPermiso_UI", datos);
+                        }
+                    }
+
+                    if (datos["behaviorList"] != null)
+                    {
+                        Dictionary<string, object> profiles = new Dictionary<string, object>();
+                        profiles["UsuarioID"] = datos["UsuarioID"];
+                        dynamic val6 = JsonConvert.DeserializeObject<object>(datos["behaviorList"]);
+                        for (int j = 0; j < val6.Count; j++)
+                        {
+                           
+                            
+                            profiles["ProfileID"] = Convert.ToString(val6[j].ProfileID.Value);
+                          
+                            val2.ExecuteNonQuery("UsuarioProfile_UI", profiles);
                         }
                     }
 

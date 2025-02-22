@@ -471,8 +471,6 @@
     <Content Include="images\logo.webp" />
     <Content Include="images\backTurbo.webp" />
     <None Include="packages.config" />
-    <None Include="Properties\PublishProfiles\RapidTransportWsm - Web Deploy.pubxml" />
-    <None Include="Properties\PublishProfiles\RapidTransportWsm - Web Deploy1.pubxml" />
     <None Include="Properties\PublishProfiles\turboflow - Web Deploy.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

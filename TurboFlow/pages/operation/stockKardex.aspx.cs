@@ -63,6 +63,9 @@ namespace WorkShop.pages.operation
 
             DataTable dt = ds.Tables[0];
 
+
+
+
             if (ds.Tables[0].Rows.Count > 0)
             {
 
@@ -74,6 +77,9 @@ namespace WorkShop.pages.operation
                 dictionary["LastUpdate"] = dt.Rows[0]["LastUpdate"].ToString();
 
                 dictionary["History"] = (object)basePage.DataTableToMap(ds.Tables[1]);
+
+                DataSet ds2 = logicAcces.ExecuteQuery("Repair_Get", datos);
+                dictionary["Repairs"] = (object)basePage.DataTableToMap(ds2.Tables[0]);
             }
 
             return dictionary;

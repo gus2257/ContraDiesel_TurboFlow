@@ -89,6 +89,8 @@
             stock.form.CategoryID = undefined;
             stock.form.BrandID = undefined;
             stock.form.ModelID = undefined;
+            stock.form.StockActivityID = undefined;
+            stock.form.Warranty = false;
             stock.form.StockNum = '';
             stock.form.Notes = '';
            

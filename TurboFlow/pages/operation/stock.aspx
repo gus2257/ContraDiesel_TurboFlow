@@ -228,6 +228,23 @@
                                 </div>
                                
                             </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="col-lg-10">
+                                        <div class="col-lg-12">Activity</div>
+                                         <select class="form-control" ng-model="stock.form.StockActivityID"  required>
+                                              <option value="10">Receive (for repair)</option>
+                                               <option value="40">Receive (for stock)</option>
+                                          </select>     
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="col-lg-10" ng-show="stock.form.StockActivityID == 10">
+                                        <div class="col-lg-12">Applies warranty:</div>
+                                         <input type="checkbox" ng-model="stock.form.Warranty" numeric-type="integer" numeric="true">
+                                      </div>
+                                </div>
+                            </div>
                              <div class="row">
                              <div class="col-lg-12">
                                      <div class="col-lg-12">Notes:</div>

@@ -165,6 +165,49 @@
                                         </table> 
                                             </div>
                                 </div>
+                                <br />
+                                 <div class="row" style="text-align:center; font-weight:bold; font-size:14pt;">
+                                        Repairs<br />
+                                </div>
+
+                                <div class="row">
+                                    
+                                    <table style="width: 100%;" class="col-lg-12 table table-condensed table-striped table-hover table-fixed" 
+                                        st-table="stock.Repairs" >
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 15%; text-align:center">Technician</th>
+                                                <th style="width: 15%; text-align:center">Activity</th>
+                                                <th style="width: 15%; text-align:center">Status</th>
+                                                <th style="width: 35%; text-align:center">Notes</th>
+                                                <th class="hidden-xs" style="width: 15%; text-align:center">Last Update</th>
+                                                <th style="width: 5%"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="max-height: 500px">
+                                            <tr ng-repeat="item in stock.Repairs">
+                                                <td style="width: 15%">{{item.Technician}}</td>
+                                                <td style="width: 15%">{{item.RepairActivity}}</td>
+                                                <td style="width: 15%">{{item.RepairStatus}}</td>
+                                                <td style="width: 35%">{{item.Notes}}</td>
+                                                <td class="hidden-xs" style="width: 15%">{{item.LastUpdate}}</td>
+                                                <td style="width: 5%">
+                                                <span class="cursor" ng-click="stock.RepairView(item)" ng-show="false" skip-disable>
+                                                    <i class="fa fa-eye" style="padding-left: 5px" skip-disable></i>&nbsp; 
+                                                </span>
+
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="9" class="text-right" style="padding-bottom: 0">
+                                                    <div st-pagination="5" st-items-by-page="30" st-template="../../Templates/pagination.html"></div>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>                                                
+                            </div>
                             </div>
                                <div class="col-lg-1">
                                     </div>

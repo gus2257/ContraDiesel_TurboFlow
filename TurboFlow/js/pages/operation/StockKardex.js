@@ -7,7 +7,7 @@
 
         stock.filter = {};
         stock.form = {};
-
+        $scope.emailPattern = /^([A-Za-z0-9._%+-])+@([A-Za-z0-9-])+\.(([A-Za-z]{2,4})+((\.([A-Za-z]{2,4}))?))$/;
         stock.esSoloLectura = accesoPantalla[0].SoloLectura;
 
 
@@ -35,6 +35,7 @@
                     stock.LastUpdate = response.d.LastUpdate;
 
                     stock.History = response.d.History;
+                    stock.Repairs = response.d.Repairs;
 
                     $scope.PermisosIniciales = response.d.Permisos;
                     stock.esSoloLectura = accesoPantalla[0].SoloLectura;

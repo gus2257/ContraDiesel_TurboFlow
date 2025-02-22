@@ -4,11 +4,12 @@
         img.hover {          
             border: 1px dashed transparent;
             border-color: #b4b4b4;
-            
+            padding: 10px;
         }
         img.hover:hover {          
             border: 3px solid transparent;
             border-color: #E76122;
+            padding: 10px;
     
         }
     </style>

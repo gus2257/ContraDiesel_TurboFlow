@@ -132,6 +132,12 @@
                                                         <span class="msg-error" ng-show="usuario.Form.Contrasenia.$error.minlength"><%= this.GetMessage("lblLongitudContrasenia") %></span><br />
                                                         <span class="msg-error" ng-show="usuario.Form.Contrasenia.$error.pattern"><%= this.GetMessage("lblContraseniaInvalida") %></span>
                                                     </div>
+                                                     <div class="col-lg-10">
+                                                        <div class="col-lg-12">Behavior</div>
+                                                        <div selected-model="usuario.behaviorSelected " options="usuario.Behavior" ng-dropdown-multiselect=""
+                                                            extra-settings="usuario.behaviorMultiSelectedConfiguration" required>
+                                                        </div>
+                                                    </div>
                                                     <div class="col-lg-10">
                                                            <div class="col-lg-12"><%= this.GetMessage("lblEsActivo") %>
                                                         <input type="checkbox" id="checkbox1" ng-model="usuario.form.EsActivo" numeric-type="integer" numeric="true"></div>

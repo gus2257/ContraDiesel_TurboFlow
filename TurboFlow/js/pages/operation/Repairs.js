@@ -1,44 +1,46 @@
 ﻿(function () {
     //Project Controller.
-    app.controller('StockController', ['$scope', '$http', function ($scope, $http) {
+    app.controller('RepairController', ['$scope', '$http', function ($scope, $http) {
         $Ex.Http = $http;
 
-        var stock = this;
+        var control = this;
 
-        stock.filter = {};
-        stock.form = {};
+        control.filter = {};
+        control.form = {};
 
-        stock.esSoloLectura = accesoPantalla[0].SoloLectura;
+        control.esSoloLectura = accesoPantalla[0].SoloLectura;
 
 
         //obtener lista
-        stock.LoadFilters = function () {
+        control.LoadFilters = function () {
             try {
                // Ex.load(true);
                 var callback = function (response) {
                    // Ex.load(false);
-                    stock.Category = response.d.Category;
-                    stock.Brand = response.d.Brand;
-                    stock.Model = response.d.Model;
-                    stock.StockStatus = response.d.StockStatus;
+                    control.Category = response.d.Category;
+                    control.Brand = response.d.Brand;
+                    control.Model = response.d.Model;
+                   // control.RepairStatus = response.d.RepairStatus;
+                    control.Technicians = response.d.Technicians;
+                    control.Activities = response.d.Activities;
 
-                    if (stock.filter.CategoryID == null) {
-                        stock.filter.CategoryID = 0;
+                    if (control.filter.CategoryID == null) {
+                        control.filter.CategoryID = 0;
                     }
-                    if (stock.filter.BrandID == null) {
-                        stock.filter.BrandID = 0;
+                    if (control.filter.BrandID == null) {
+                        control.filter.BrandID = 0;
                     }
-                    if (stock.filter.ModelID == null) {
-                        stock.filter.ModelID = 0;
+                    if (control.filter.ModelID == null) {
+                        control.filter.ModelID = 0;
                     }
-                    if (stock.filter.StockStatusID == null) {
-                        stock.filter.StockStatusID = 10;
+                    if (control.filter.RepairStatusID == null) {
+                        control.filter.RepairStatusID = 1;
                     }
 
                     $scope.PermisosIniciales = response.d.Permisos;
-                    stock.esSoloLectura = accesoPantalla[0].SoloLectura;
+                    control.esSoloLectura = accesoPantalla[0].SoloLectura;
                 }
-                $Ex.Execute("InitLoad", stock.filter, callback);
+                $Ex.Execute("InitLoad", control.filter, callback);
             } catch (ex) {
                 Ex.mensajes(ex.message);
                // Ex.load(false);
@@ -46,114 +48,185 @@
         };
 
         //obtener lista
-        stock.LoadStock = function () {
+        control.RepairLoad = function () {
             try {
                 Ex.load(true);
                 var callback = function (response) {
                     Ex.load(false);
-                    stock.Grouped = response.d.StockGrouped;
-                    stock.List = response.d.StockList;
+                    control.Repairs = response.d.Repairs;
 
                 }
-                $Ex.Execute("StockLoad", stock.filter, callback);
+                $Ex.Execute("RepairLoad", control.filter, callback);
             } catch (ex) {
                 Ex.mensajes(ex.message);
                 Ex.load(false);
             }
         };
 
+        control.RepairEdit = function (item) {
 
-        stock.LoadDrops = function (who) {
+            control.Form.isValid = true;
+            // stock.form = {};
+            control.form.RepairID = item.RepairID;
+
+            control.form.StockID = item.StockID;
+            control.form.StockNum = item.StockNum;
+            control.form.RepairStatusID = item.RepairStatusID;
+            control.form.RepairStatus = item.RepairStatus;
+            control.form.Category = item.Category;
+            control.form.Brand = item.Brand;
+            control.form.Model = item.Model;
+            control.form.TechnicianID = item.TechnicianID
+            control.form.Notes = item.Notes
+            control.form.Lot = item.Lot
+            control.form.UpdatedBy = item.UpdatedBy
+            control.form.LastUpdate = item.LastUpdate;
+
+            $('#modal-long2').modal('show');
+        };
+
+        control.StockFind = function () {
+
+            control.stockFind = {};
+            control.stockFind.StockID = 0; 
+            control.stockFind.StockNum = control.form.StockNum; 
+
             try {
                 // Ex.load(true);
                 var callback = function (response) {
                     // Ex.load(false);
-                    stock.CategoryFrm = response.d.Category;
-                    stock.BrandFrm = response.d.Brand;
-                    stock.ModelFrm = response.d.Model;
+                    if (response.d.Result == "OK") {
+                        control.form.StockID = response.d.StockID;
+                        control.form.Category = response.d.Category;
+                        control.form.Brand = response.d.Brand;
+                        control.form.Model = response.d.Model;
+
+                        control.form.Message = "";
+                    } else {
+                        control.form.Message = response.d.Message;
+                    }
 
 
                 }
-                $Ex.Execute("LoadDrops", stock.form, callback);
+                $Ex.Execute("StockSearch", control.stockFind, callback);
             } catch (ex) {
                 Ex.mensajes(ex.message);
                 // Ex.load(false);
             }
         };
 
-        stock.New = function () {
+        control.New = function () {
 
-            stock.Form.isValid = true;
-            // stock.form = {};
-            stock.form.StockID = 0;
-            stock.form.CategoryID = undefined;
-            stock.form.BrandID = undefined;
-            stock.form.ModelID = undefined;
-            stock.form.StockNum = '';
-            stock.form.Notes = '';
+            control.Form.isValid = true;
+            // control.form = {};
+            control.form.RepairID = 0;
+            control.form.StockID = 0;
+            control.form.IsNew = true;
+            control.form.Category = '';
+            control.form.Brand = '';
+            control.form.Model = '';
+            control.form.StockNum = '';
+            control.form.RepairStatusID = 10;
            
             $('#modal-long').modal('show');
         };
 
 
-        stock.Kardex = function (item) {
 
-            location.replace("StockKardex.aspx?StockID=" + item.StockID);
-           
-        };
-
-        stock.SetClassSummitValid = function () {
-            if (!stock.Form.isValid)
+        control.SetClassSummitValid = function () {
+            if (!control.Form.isValid)
                 return true;
             else
                 return false;
         };
-        stock.Save = function () {
+
+        control.RepairSave = function (action) {
+
             try {
                 Ex.load(true);
 
 
-            
-                $Ex.Execute("StockSave", stock.form, function (response, isInvalid) {
+                control.form.RepairStatusID2 = action;
+                $Ex.Execute("RepairSave", control.form, function (response, isInvalid) {
 
                     if (isInvalid) {
-                        stock.Form.isValid = false;
+                        control.Form.isValid = false;
                         Ex.load(false);
                         return;
                     }
 
                     if (response.d.Result == "OK") {
-                        alert(Ex.GetResourceValue("MsgGuardarUsuario"));
-                        location.replace("StockKardex.aspx?StockID=" + response.d.StockID);
+                        
 
-                        //stock.LoadStock();
-                        //Ex.mensajes(Ex.GetResourceValue("MsgGuardarUsuario"), 4);
-                        //$('#modal-long').modal('hide');
+                        control.RepairLoad();
+                        Ex.mensajes("Saved succesfully", 4);
+                        $('#modal-long2').modal('hide');
                     }
                     else {
                         Ex.mensajes(response.d.Message);
                         Ex.load(false);
                     }
                 },
-                    stock.Form);
+                    control.Form);
             } catch (ex) {
                 Ex.mensajes(ex.Message);
                 Ex.load(false);
             }
 
+
         };
 
-        stock.ReloadFilters = function () {
-            stock.LoadFilters();
+        control.RepairCreate = function () {
+
+            if (control.form.StockID == 0) {
+                Ex.mensajes("Stock ID is no valid");
+
+            } else {
+
+                try {
+                    Ex.load(true);
+
+
+
+                    $Ex.Execute("RepairSave", control.form, function (response, isInvalid) {
+
+                        if (isInvalid) {
+                            control.Form.isValid = false;
+                            Ex.load(false);
+                            return;
+                        }
+
+                        if (response.d.Result == "OK") {
+                           
+                            control.RepairLoad();
+                            Ex.mensajes("Repair created", 4);
+                            $('#modal-long').modal('hide');
+                           // $('#modal-long2').modal('show');
+                        }
+                        else {
+                            Ex.mensajes(response.d.Message);
+                            Ex.load(false);
+                        }
+                    },
+                        control.Form);
+                } catch (ex) {
+                    Ex.mensajes(ex.Message);
+                    Ex.load(false);
+                }
+            }
+
+        };
+
+        control.ReloadFilters = function () {
+            control.LoadFilters();
         }
 
-        stock.Search = function () {
-            stock.LoadStock();
+        control.Search = function () {
+            control.RepairLoad();
         }
 
-        stock.LoadFilters();
-        stock.LoadStock();
-        stock.LoadDrops(0);
+        control.LoadFilters();
+        control.RepairLoad();
        
 
     }]);
