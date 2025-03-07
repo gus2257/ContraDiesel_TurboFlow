@@ -275,9 +275,12 @@
     <Content Include="pages\Acceso.aspx" />
     <Content Include="pages\catalogos\Actividad.aspx" />
     <Content Include="pages\catalogos\BrandModel.aspx" />
+    <Content Include="pages\catalogos\Activity.aspx" />
+    <Content Include="pages\catalogos\Activity.js" />
     <Content Include="pages\catalogos\Usuario.aspx" />
     <Content Include="pages\Error.aspx" />
     <Content Include="pages\Login.aspx" />
+    <Content Include="pages\menus\noaccess.aspx" />
     <Content Include="pages\menus\operations.aspx" />
     <Content Include="pages\menus\config.aspx" />
     <Content Include="pages\menus\main.aspx" />
@@ -367,6 +370,13 @@
     <Compile Include="pages\catalogos\BrandModel.aspx.designer.cs">
       <DependentUpon>BrandModel.aspx</DependentUpon>
     </Compile>
+    <Compile Include="pages\catalogos\Activity.aspx.cs">
+      <DependentUpon>Activity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\catalogos\Activity.aspx.designer.cs">
+      <DependentUpon>Activity.aspx</DependentUpon>
+    </Compile>
     <Compile Include="pages\catalogos\Usuario.aspx.cs">
       <DependentUpon>Usuario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -387,6 +397,13 @@
     </Compile>
     <Compile Include="pages\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\menus\noaccess.aspx.cs">
+      <DependentUpon>noaccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\menus\noaccess.aspx.designer.cs">
+      <DependentUpon>noaccess.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\menus\operations.aspx.cs">
       <DependentUpon>operations.aspx</DependentUpon>

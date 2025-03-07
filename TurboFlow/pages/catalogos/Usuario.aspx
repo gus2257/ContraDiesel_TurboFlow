@@ -7,7 +7,7 @@
         <div ng-controller="UsuarioController as usuario">
     <ol class="breadcrumb page-breadcrumb">
         <li><i class="fa fa-tag fa-fw"></i></li>
-        <li><%= this.GetMessage("MainModule") %> &nbsp;</li>
+        <li><a href="../menus/config.aspx">Configuration</a>&nbsp;</li>
         <li class="active"><%= this.GetMessage("Module") %></li>
         <li class="notSlide pull-right margin10"> 
             <a  id="lnkAgregar" href="#">

@@ -64,7 +64,7 @@
                                     <div style="font-size:15pt; color:black; padding:10px;">Brand & Models</div>
                                 </div>
                                 <div class="col-lg-4 col-md-6">
-                                    <a href="../catalogos/actividad.aspx">
+                                    <a href="../catalogos/activity.aspx">
                                     <img class="hover" src="../../images/menuActivity.png" style="width:150px; height:150px;" /></a><br />
                                     <div style="font-size:15pt; color:black; padding:10px;">Activities</div>
                                 </div>

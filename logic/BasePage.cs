@@ -184,7 +184,8 @@ namespace logic
             if (table.Rows.Count <= 0)
                 return;
             if (int.Parse(table.Rows[0]["PermisoID"].ToString()) != 13 && !bool.Parse(table.Rows[0]["AccesoPantalla"].ToString()))
-                this.Response.Redirect(this.URL + "pages/Login.aspx?ReturnUrl=" + this.Request.Url.PathAndQuery, true);
+                this.Response.Redirect(this.URL + "pages/menus/noaccess.aspx?ReturnUrl=" + this.Request.Url.PathAndQuery, true);
+    //            this.Response.Redirect(this.URL + "pages/Login.aspx?ReturnUrl=" + this.Request.Url.PathAndQuery, true);  SEGURIDAD
             this.RunJavascriptBeforeLoadPage("var accesoPantalla = jQuery.parseJSON('" + scriptSerializer.Serialize((object)this.DataTableToMap(table)) + "');");
         }
 
