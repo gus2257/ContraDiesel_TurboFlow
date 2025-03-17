@@ -297,9 +297,18 @@
                         </div>
                     </div>
                     <div class="modal-footer">
+                       <div class="row">
+                        <div class="col-lg-8" style="font-size:8pt; text-align:left">
+        
+                                  By: {{stock.historyBy}}
+                                  Date: {{stock.historyDate}}
+                        </div>
+                       <div class="col-lg-4">
                         <button type="button" class="green btn btn-success btn-radius big-input" ng-click="stock.Save()" ng-hide ="stock.esSoloLectura">
                             Save
                         </button>
+                           </div>
+                          </div>
                     </div>
                 </div>
             </div>

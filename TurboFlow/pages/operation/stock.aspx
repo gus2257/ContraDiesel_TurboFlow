@@ -197,7 +197,7 @@
                              <div class="row">
                                      <div class="col-lg-12">
                                      <div class="col-lg-12">Stock ID:</div>
-                                       <input type="text" ng-model="stock.form.StockNum" ng-value="0" numeric-type="integer" numeric="true" required allow-pattern="\d+" />
+                                       <input type="text" ng-model="stock.form.StockNum" class="form-control" ng-value="0" numeric-type="integer" numeric="true" required allow-pattern="\d+" />
                                          <span style="text-decoration-color:gray;">Type "0" for new stock number</span>
                                    </div>
                              </div>
@@ -227,6 +227,26 @@
                                       </div>
                                 </div>
                                
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div class="col-lg-12">Cutomer / Vendor</div>
+
+
+                                    <ui-select ng-model="stock.ContactSel" theme="bootstrap" style="width: 100%">
+                                    <ui-select-match >
+                                        {{ $select.selected.ContactName || $select.selected}}
+                                    </ui-select-match>
+                                    <ui-select-choices repeat="contact in stock.ContactsFilter | filter: $select.search"  refresh="stock.searchContact($select.search)" refresh-delay="400" minimum-Input-Length="4" >
+                                        <b><div ng-bind-html="contact.ContactName | highlight: $select.search"></div> </b>
+                                        <small >                                                                                                                                           
+                                            {{contact.AddressComplete }}&nbsp;, {{contact.City }}&nbsp;, {{contact.State }}
+                                        </small>     
+                                    </ui-select-choices>
+                                </ui-select>
+                                    <a href="#" ng-show="stock.ContactNotFound" ng-click="stock.NewContact">Create new</a>
+                                </div>
+
                             </div>
                             <div class="row">
                                 <div class="col-lg-4">
@@ -268,6 +288,6 @@
                
      </div>
 
-    <script type="text/javascript" language="javascript" src="<%=ruta %>js/pages/operation/Stock.js?V00039"></script>
+    <script type="text/javascript" language="javascript" src="Stock.js?V00039"></script>
 
 </asp:Content>

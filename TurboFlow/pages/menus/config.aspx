@@ -37,12 +37,12 @@
                            </div>   
                            <div class="col-lg-6">                             
                                 <div class="col-lg-4 col-md-6">
-                                       <a href="../reports/monitor.aspx">
+                                       <a href="../catalogos/contact.aspx">
                                      <img class="hover" src="../../images/menuCustomer.png" style="width:150px; height:150px"/></a><br />
-                                     <div style="font-size:15pt; color:black; padding:10px;">Customers</div>
+                                     <div style="font-size:15pt; color:black; padding:10px;">Customers & Vendors</div>
                                     
                                  </div>
-                                <div class="col-lg-4 col-md-6">
+                                <%--<div class="col-lg-4 col-md-6">
                                     <a href="menuOperations.aspx">
                                     <img class="hover" src="../../images/menuVendor.png" style="width:150px; height:150px;" />
                                      </a><br />
@@ -52,7 +52,7 @@
                                     <a href="menuReports.aspx">
                                     <img class="hover" src="../../images/menuTech.png" style="width:150px; height:150px;" /></a><br />
                                     <div style="font-size:15pt; color:black; padding:10px;">Technicians</div>
-                                </div>
+                                </div>--%>
                                 <div class="col-lg-4 col-md-6">
                                     <a href="menuConfig.aspx">
                                     <img class="hover" src="../../images/menuParts.png" style="width:150px; height:150px;" /></a><br />

@@ -46,6 +46,26 @@ namespace WorkShop.pages.operation
             dictionary["Model"] = (object)basePage.DataTableToMap(ds.Tables[2]);
             dictionary["StockStatus"] = (object)basePage.DataTableToMap(ds.Tables[3]);
 
+            Dictionary<string, string> filter = new Dictionary<string, string>();
+            DataSet ds2 = logicAcces.ExecuteQuery("Contact_Get", filter);
+            dictionary["Contacts"] = (object)basePage.DataTableToMap(ds2.Tables[0]);
+
+            return dictionary;
+        }
+
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod]
+        public static Dictionary<string, object> ContactsAutocomplete(Dictionary<string, string> datos)
+        {
+            BasePage basePage = new BasePage();
+            logic_acces logicAcces = new logic_acces(BasePage.ConexionDB);
+            Dictionary<string, object> dictionary = new Dictionary<string, object>();
+          
+            //Dictionary<string, string> filter = new Dictionary<string, string>();
+            DataSet ds2 = logicAcces.ExecuteQuery("Contact_Get", datos);
+            dictionary["Contacts"] = (object)basePage.DataTableToMap(ds2.Tables[0]);
+
             return dictionary;
         }
 

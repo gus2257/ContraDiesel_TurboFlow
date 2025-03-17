@@ -8,6 +8,8 @@
         stock.filter = {};
         stock.form = {};
 
+        stock.ContactNotFound = false;
+
         stock.esSoloLectura = accesoPantalla[0].SoloLectura;
 
 
@@ -94,6 +96,9 @@
             stock.form.Warranty = false;
             stock.form.StockNum = '';
             stock.form.Notes = '';
+
+            stock.form.ContactSel = undefined;
+            stock.ContactsFilter = stock.Contacts;
            
             $('#modal-long').modal('show');
         };
@@ -152,6 +157,23 @@
 
         stock.Search = function () {
             stock.LoadStock();
+        }
+
+
+        stock.searchContact = function (description) {
+
+            var filter = {};
+            filter.ContactName = description;
+
+            $Ex.Execute("ContactsAutocomplete", filter, function (response) {
+                stock.ContactsFilter = response.d.Contacts;
+
+                if (stock.ContactsFilter.length == 0) {
+                    stock.ContactNotFound = true;
+                }
+
+                Ex.load(false);
+            }, 'undefined', false);
         }
 
         stock.LoadFilters();
