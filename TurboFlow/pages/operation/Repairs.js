@@ -6,6 +6,8 @@
         var control = this;
 
         control.filter = {};
+        control.filter.IsWarranty = "0";
+        control.filter.RepairStatusID = "0";
         control.form = {};
 
         control.esSoloLectura = accesoPantalla[0].SoloLectura;
@@ -33,9 +35,7 @@
                     if (control.filter.ModelID == null) {
                         control.filter.ModelID = 0;
                     }
-                    if (control.filter.RepairStatusID == null) {
-                        control.filter.RepairStatusID = 1;
-                    }
+                 
 
                     $scope.PermisosIniciales = response.d.Permisos;
                     control.esSoloLectura = accesoPantalla[0].SoloLectura;

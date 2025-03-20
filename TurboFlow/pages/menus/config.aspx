@@ -26,7 +26,7 @@
                         <div class="col-lg-12; center" >
                             <br />
                             <br />
-                            <img src="../../images/logo.webp" style="width:300px;" />
+                            <img src="../../images/logo.webp" style="width:200px;" />
 
                             <br /> <br /> <br /> <br />
                          </div>

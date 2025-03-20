@@ -9,6 +9,8 @@
         stock.form = {};
         $scope.emailPattern = /^([A-Za-z0-9._%+-])+@([A-Za-z0-9-])+\.(([A-Za-z]{2,4})+((\.([A-Za-z]{2,4}))?))$/;
         stock.esSoloLectura = accesoPantalla[0].SoloLectura;
+        stock.ContactNotFound = false;
+        stock.ContactNew = false;
 
 
         //obtener lista
@@ -69,6 +71,9 @@
 
             stock.Form.isValid = true;
 
+            stock.ContactNotFound = false;
+            stock.ContactNew = false;
+        
             if (item == 0) {
                 stock.form.StockHistoryID = 0;
                 stock.form.Customer = '';
@@ -103,6 +108,50 @@
         };
 
 
+        stock.ShowActivities = function (item) {
+
+            try {
+              
+
+                stock.filter = {
+                    "ContactID": item.ContactID,
+                    "StockID": stock.form.StockID,
+                }
+
+
+                var callback = function (response) {
+                    // Ex.load(false);
+
+                    stock.ContactKardex = response.d.ContactKardex;
+
+                    $('#modal-long2').modal('show');
+                }
+                $Ex.Execute("ContactKardex", stock.filter, callback);
+            } catch (ex) {
+                Ex.mensajes(ex.message);
+                // Ex.load(false);
+            }
+
+           
+        };
+
+        stock.searchContact = function (description) {
+
+            var filter = {};
+            filter.ContactName = description;
+
+            $Ex.Execute("ContactsAutocomplete", filter, function (response) {
+                stock.ContactsFilter = response.d.Contacts;
+
+                if (stock.ContactsFilter.length == 0) {
+                    stock.ContactNotFound = true;
+                } else {
+                    stock.ContactNotFound = false;
+                }
+
+                Ex.load(false);
+            }, 'undefined', false);
+        };
 
         stock.SetClassSummitValid = function () {
             if (!stock.Form.isValid)
@@ -114,7 +163,16 @@
         stock.Save = function () {
             try {
                 Ex.load(true);
-            
+
+
+                if (stock.ContactSel != undefined) {
+                    stock.form.ContactID = stock.ContactSel.ContactID;
+                    stock.form.CustomerName = stock.ContactSel.ContactName;
+
+                } else {
+                    stock.form.ContactID = 0;
+                    stock.form.CustomerName = stock.CustomerName;
+                }
                 $Ex.Execute("StockHistorySave", stock.form, function (response, isInvalid) {
 
                     if (isInvalid) {

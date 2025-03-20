@@ -9,6 +9,7 @@
         stock.form = {};
 
         stock.ContactNotFound = false;
+        stock.ContactNew = false;
 
         stock.esSoloLectura = accesoPantalla[0].SoloLectura;
 
@@ -96,9 +97,13 @@
             stock.form.Warranty = false;
             stock.form.StockNum = '';
             stock.form.Notes = '';
+            stock.form.Multiple = 1;
 
             stock.form.ContactSel = undefined;
             stock.ContactsFilter = stock.Contacts;
+
+            stock.ContactNotFound = false;
+            stock.ContactNew = false;
            
             $('#modal-long').modal('show');
         };
@@ -120,7 +125,14 @@
             try {
                 Ex.load(true);
 
+                if (stock.ContactSel != undefined) {
+                    stock.form.ContactID = stock.ContactSel.ContactID;
+                    stock.form.ContactName = stock.ContactSel.ContactName;
 
+                } else {
+                    stock.form.ContactID = 0;
+                    stock.form.ContactName = stock.ContactName;
+                }
             
                 $Ex.Execute("StockSave", stock.form, function (response, isInvalid) {
 
@@ -131,12 +143,18 @@
                     }
 
                     if (response.d.Result == "OK") {
-                        alert(Ex.GetResourceValue("MsgGuardarUsuario"));
-                        location.replace("StockKardex.aspx?StockID=" + response.d.StockID);
 
-                        //stock.LoadStock();
-                        //Ex.mensajes(Ex.GetResourceValue("MsgGuardarUsuario"), 4);
-                        //$('#modal-long').modal('hide');
+                        if (stock.form.Multiple == 1) {
+                            alert(Ex.GetResourceValue("MsgGuardarUsuario"));
+                            location.replace("StockKardex.aspx?StockID=" + response.d.StockID);
+
+                        } else {
+                            $('#modal-long').modal('hide');
+                            $('#modal-long2').modal('show');
+                            stock.StockMultiple = response.d.StockMultiple;
+                        }
+
+                        
                     }
                     else {
                         Ex.mensajes(response.d.Message);
@@ -170,12 +188,14 @@
 
                 if (stock.ContactsFilter.length == 0) {
                     stock.ContactNotFound = true;
+                } else {
+                    stock.ContactNotFound = false;
                 }
 
                 Ex.load(false);
             }, 'undefined', false);
-        }
-
+        };
+       
         stock.LoadFilters();
         stock.LoadStock();
         stock.LoadDrops(0);

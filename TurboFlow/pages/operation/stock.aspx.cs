@@ -89,9 +89,9 @@ namespace WorkShop.pages.operation
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod]
-        public static Dictionary<string, string> StockSave(Dictionary<string, string> datos)
+        public static Dictionary<string, object> StockSave(Dictionary<string, string> datos)
         {
-            Dictionary<string, string> result = new Dictionary<string, string>();
+            Dictionary<string, object> result = new Dictionary<string, object>();
             
             try
             {
@@ -102,12 +102,14 @@ namespace WorkShop.pages.operation
                 TransactionScope val3 = new TransactionScope();
                 try
                 {
-                    val2.ExecuteNonQuery("Stock_UI", datos);
+                    DataSet ds2 = val2.ExecuteQuery("Stock_UI", datos);
 
                     val3.Complete();
 
                     result["Result"] = "OK";
                     result["StockID"] = datos["StockID"];
+
+                    result["StockMultiple"] = (object)val.DataTableToMap(ds2.Tables[0]); ;
 
 
                 }

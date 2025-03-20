@@ -254,9 +254,9 @@
     <Content Include="js\pages\catalogos\Usuario.js" />
     <Content Include="js\pages\login.js" />
     <Content Include="js\pages\menus\menu.js" />
-    <Content Include="js\pages\operation\Repairs.js" />
+    <Content Include="pages\operation\Repairs.js" />
     <Content Include="js\pages\operation\Stock.js" />
-    <Content Include="js\pages\operation\StockKardex.js" />
+    <Content Include="pages\operation\StockKardex.js" />
     <Content Include="pages\operation\Stock.js" />
     <Content Include="js\pages\principal.js" />
     <Content Include="js\pages\reportes\Dashboard.js" />
@@ -487,8 +487,9 @@
     <Content Include="include\masterGuard2.Master" />
     <Content Include="include\masterGuard3.Master" />
     <Content Include="include\masterGuardSimple.Master" />
-    <Content Include="images\logo.webp" />
+    <Content Include="images\logo2.webp" />
     <Content Include="images\backTurbo.webp" />
+    <Content Include="images\logo.webp" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\turboflow - Web Deploy.pubxml" />
     <None Include="Properties\Settings.settings">

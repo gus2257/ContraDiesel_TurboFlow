@@ -53,6 +53,9 @@ namespace logic
             if (HttpContext.Current.Session["TimeOffset"] != null)
                 strTimeOffset = HttpContext.Current.Session["TimeOffset"].ToString();
             p_datos["TimeZoneOffSet"] = strTimeOffset;
+
+            p_datos["UserId"] = HttpContext.Current.Session["UserId"] == null ? "1" : HttpContext.Current.Session["UserId"].ToString();
+
             //try {
             //    SqlConnection conn = new SqlConnection(logic_acces.conexionString);
             //    conn.Open();
@@ -118,6 +121,8 @@ namespace logic
             if (HttpContext.Current.Session["TimeOffset"] != null)
                 strTimeOffset = HttpContext.Current.Session["TimeOffset"].ToString();
             parameters["TimeZoneOffSet"] = strTimeOffset;
+
+            parameters["UserId"] = HttpContext.Current.Session["UserId"] == null ? "1" : HttpContext.Current.Session["UserId"].ToString();
 
             BasePage basePage = new BasePage();
             using (SqlConnection connection = new SqlConnection(logic_acces.conexionString))

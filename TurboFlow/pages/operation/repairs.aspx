@@ -45,7 +45,7 @@
                                                     </select>                                                            
                                                 </div>
                                             </div>
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-2">
                                                  <div class="input">
                                                     <div class="col-lg-12">Brand</div>
                                                     <select class="form-control" ng-model="control.filter.BrandID"
@@ -53,7 +53,7 @@
                                                     </select>                                                            
                                                 </div>
                                             </div>
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-2">
                                                  <div class="input">
                                                     <div class="col-lg-12">Model</div>
                                                     <select class="form-control" ng-model="control.filter.ModelID"
@@ -72,13 +72,23 @@
                                                  <div class="input">
                                                     <div class="col-lg-12">Status</div>
                                                      <select class="form-control" ng-model="control.filter.RepairStatusID">
-                                                            <option value="0">Show all</option>
-                                                            <option value="1">Show open</option>
+                                                            <option value="1">Show all</option>
+                                                            <option value="0">Show open</option>
                                                             <option value="10">Pending</option>
                                                             <option value="20">In process</option>
                                                             <option value="30">Completed</option>
                                                             <option value="40">Hold</option>
                                                             <option value="50">Unable to fix</option>
+                                                      </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                 <div class="input">
+                                                    <div class="col-lg-12">Warranty</div>
+                                                     <select class="form-control" ng-model="control.filter.IsWarranty">
+                                                            <option value="0">Show all</option>
+                                                            <option value="1">w/ warranty</option>
+                                                            <option value="2">wo/ warrayty</option>
                                                       </select>
                                                 </div>
                                             </div>
@@ -96,7 +106,8 @@
                                                 <th style="width: 15%">Type</th>
                                                 <th style="width: 15%">Technician</th>
                                                 <th style="width: 15%">Activity</th>
-                                                <th style="width: 15%">Status</th>
+                                                <th style="width: 10%">Status</th>
+                                                <th style="width: 5%">Is Warranty</th>
                                                 <th class="hidden-xs" style="width: 15%">Last Update</th>
                                                 <th style="width: 5%"></th>
                                             </tr>
@@ -107,7 +118,10 @@
                                                 <td style="width: 15%">{{item.StockType}}</td>
                                                 <td style="width: 15%">{{item.Technician}}</td>
                                                 <td style="width: 15%">{{item.RepairActivity}}</td>
-                                                <td style="width: 15%">{{item.RepairStatus}}</td>
+                                                <td style="width: 10%">{{item.RepairStatus}}</td>
+                                                <td style="width: 5%">
+                                                     <input type="checkbox" ng-model="item.IsWarranty" ng-checked="{{item.IsWarranty}}" value="{{item.IsWarranty}}" disabled /> 
+                                                </td>
                                                 <td class="hidden-xs" style="width: 15%">{{item.LastUpdate}}</td>
                                                 <td style="width: 5%">
                                                 <span class="cursor" ng-click="control.RepairEdit(item)" skip-disable>
@@ -299,6 +313,6 @@
                
      </div>
 
-    <script type="text/javascript" language="javascript" src="<%=ruta %>js/pages/operation/Repairs.js?V00039"></script>
+    <script type="text/javascript" language="javascript" src="Repairs.js?V00039"></script>
 
 </asp:Content>

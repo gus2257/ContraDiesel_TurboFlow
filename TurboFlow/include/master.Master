@@ -94,7 +94,7 @@
                 <tr style="height:58px">
                     <td style="text-align:left; width:20%">
                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <img class="hidden-xs" alt="" src="<%=ruta%>/images/logo.webp" style="width:150px; object-fit:contain;"  />
+                            <img class="hidden-xs" alt="" src="<%=ruta%>/images/logo.webp" style="width:75px; object-fit:contain;"  />
                     </td>
                     <td style="text-align:center; font-size:30px; font-weight:bold;">
                         Turbo Flow

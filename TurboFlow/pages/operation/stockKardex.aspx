@@ -116,12 +116,6 @@
                             <div class="col-lg-10" style="text-align:center;">
                                 <div class="row" style="text-align:center; font-weight:bold; font-size:14pt;">
                                         History
-                                </div>
-                                <div class="row" style="text-align:right;">
-                                    <a  id="lnkAgregar" href="#">
-                                         <button class="btn btn-primary btn-xs m-l-sm" id="edit" type="button" ng-click="stock.NewHistory(0)" ng-hide="stock.esSoloLectura">
-                                             <i class="fa fa-plus"></i>&nbsp; <%= this.GetMessage("lblAdd") %></button>
-                                     </a>   
                                 </div>                               
                                 <div class="row">
                                         <div class="col-lg-12"  style="text-align:center">
@@ -136,14 +130,22 @@
                                                     <th style="width: 15%; text-align:center">Unit Ref</th>
                                                     <th style="width: 25%; text-align:center">Notes</th>
                                                     <th style="width: 15%; text-align:center">Changed by</th>  
-                                                    <th style="width: 5%; text-align:center"></th> 
+                                                    <th style="width: 5%; text-align:center">
+                                                        <a  id="lnkAgregar" href="#">
+                                                             <button class="btn btn-primary btn-xs m-l-sm" id="edit" type="button" ng-click="stock.NewHistory(0)" ng-hide="stock.esSoloLectura">
+                                                                 <i class="fa fa-plus"></i>&nbsp; <%= this.GetMessage("lblAdd") %></button>
+                                                         </a> 
+
+                                                    </th> 
                                                 </tr>
                                             </thead>
                                             <tbody style="max-height: 500px">
                                                 <tr ng-repeat="item in stock.History">
                                                     <td style="width: 10%">{{item.AuditDateShort}}</td>
                                                     <td style="width: 10%">{{item.StockActivity}}</td>
-                                                    <td style="width: 20%">{{item.Customer}}</td>
+                                                    <td style="width: 20%">
+                                                        <a href="#" ng-click="stock.ShowActivities(item)" title="Show activities">{{item.Customer}}</a>
+                                                     </td>
                                                     <td style="width: 15%">{{item.UnitRef}}</td>
                                                     <td style="width: 25%">{{item.NotesShort}}</td>
                                                     <td style="width: 15%">{{item.UserName}}</td>
@@ -217,7 +219,7 @@
 
                  </div>
                
-
+        <%-- Moda de Historia --%>
         <div id="modal-long" tabindex="-1" data-replace="true" class="modal fade" data-backdrop="static" data-keyboard="false">
         <div ng-form="stock.Form" ng-class="{'submitted': stock.SetClassSummitValid()}">
             <div class="modal-dialog modal-wide-med" role="document">
@@ -251,7 +253,21 @@
                                  <div class="col-lg-4">
                                   <div class="col-lg-10">
                                         <div class="col-lg-12">Customer / vendor:</div>
-                                         <input  type="text" class="form-control"  ng-model="stock.form.Customer" maxlength="50" ng-required="stock.form.StockActivityID != 30" />
+                                                <ui-select ng-model="stock.ContactSel" theme="bootstrap" style="width: 100%" ng-show="!stock.ContactNew">
+                                                <ui-select-match >
+                                                    {{ $select.selected.ContactName || $select.selected}}
+                                                </ui-select-match>
+                                                <ui-select-choices repeat="contact in stock.ContactsFilter | filter: $select.search"  refresh="stock.searchContact($select.search)" refresh-delay="400" minimum-Input-Length="4" >
+                                                    <b><div ng-bind-html="contact.ContactName | highlight: $select.search"></div> </b>
+                                                    <small >                                                                                                                                           
+                                                        {{contact.AddressComplete }}&nbsp;, {{contact.City }}&nbsp;, {{contact.State }}
+                                                    </small>     
+                                                </ui-select-choices>
+                                            </ui-select>
+                                                <a href="#" ng-show="stock.ContactNotFound" ng-click="stock.ContactNew = true; stock.ContactNotFound = false;">Create new</a>
+                                                 <input type="text" class="form-control" ng-model="stock.CustomerName" ng-show="stock.ContactNew"  placeholder="Type new customer or vendor"   ng-required="stock.ContactNew"/>
+
+<%--                                         <input  type="text" class="form-control"  ng-model="stock.form.Customer" maxlength="50" ng-required="stock.form.StockActivityID != 30" />--%>
                                       </div>
                                 </div>
                                  <div class="col-lg-4">
@@ -287,13 +303,6 @@
                                        <textarea ng-model="stock.form.Notes" rows="4" cols="100" ng-required="stock.form.StockActivityID == 30" ></textarea>
                                    </div>
                              </div>
-                            <div class="row">
-                            <div class="col-lg-12">
-                                    
-                                      By: {{stock.historyBy}}
-                                      Date: {{stock.historyDate}}
-                            </div>
-                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -314,13 +323,64 @@
             </div>
         </div>
     </div>
+
+        <%-- Moda de activities --%>
+        <div id="modal-long2" tabindex="-1" data-replace="true" class="modal fade" data-backdrop="static" data-keyboard="false">
+        <div ng-form="stock.Form">
+            <div class="modal-dialog modal-wide-med" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" data-dismiss="modal" aria-hidden="true"
+                            class="close" skip-disable>
+                            &times;</button>
+                        <h4>Customer/vendor activity</h4>
+
+                    </div>
+                    <div class="modal-body">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-lg-12" style="text-align:center">
+                                <table style="width: 90%; align-content:left" class="table table-condensed table-striped table-hover table-fixed" 
+                                    st-table="stock.ContactKardex"  >
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 10%; text-align:center">Stock</th>
+                                            <th style="width: 10%; text-align:center">Model</th>
+                                            <th style="width: 20%; text-align:center">Activity</th>
+                                            <th style="width: 10%; text-align:center">Warranty</th>
+                                            <th style="width: 5%; text-align:center">Unit Ref</th>
+                                            <th style="width: 20%; text-align:center">Notes</th>
+                                            <th style="width: 10%; text-align:center">Date</th>  
+                                        </tr>
+                                    </thead>
+                                    <tbody style="max-height: 500px">
+                                        <tr ng-repeat="item in stock.ContactKardex">
+                                            <td style="width: 10%">{{item.StockNum}}</td>
+                                            <td style="width: 10%">{{item.ModelName}}</td>
+                                            <td style="width: 20%">{{item.StockActivity}}</td>
+                                            <td style="width: 10%"><input type="checkbox" ng-checked="{{item.Warranty}}" value="{{item.Warranty}}" disabled /></td>
+                                            <td style="width: 5%">{{item.UnitRef}}</td>
+                                            <td style="width: 20%">{{item.Notes}}</td>
+                                            <td style="width: 10%">{{item.LastUpdate}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>.
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
             </div>
         </div>
 
-               
-     </div>
 
-    <script type="text/javascript" language="javascript" src="<%=ruta %>js/pages/operation/StockKardex.js?V00039"></script>
+
+    <script type="text/javascript" language="javascript" src="StockKardex.js?V00039"></script>
 
    
 </asp:Content>

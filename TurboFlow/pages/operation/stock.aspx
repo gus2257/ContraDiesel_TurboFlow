@@ -195,7 +195,7 @@
                     <div class="modal-body">
                         <div class="ibox-content">
                              <div class="row">
-                                     <div class="col-lg-12">
+                                     <div class="col-lg-3">
                                      <div class="col-lg-12">Stock ID:</div>
                                        <input type="text" ng-model="stock.form.StockNum" class="form-control" ng-value="0" numeric-type="integer" numeric="true" required allow-pattern="\d+" />
                                          <span style="text-decoration-color:gray;">Type "0" for new stock number</span>
@@ -229,11 +229,11 @@
                                
                             </div>
                             <div class="row">
-                                <div class="col-lg-8">
+                                <div class="col-lg-4">
                                     <div class="col-lg-12">Cutomer / Vendor</div>
 
 
-                                    <ui-select ng-model="stock.ContactSel" theme="bootstrap" style="width: 100%">
+                                    <ui-select ng-model="stock.ContactSel" theme="bootstrap" style="width: 100%" ng-show="!stock.ContactNew">
                                     <ui-select-match >
                                         {{ $select.selected.ContactName || $select.selected}}
                                     </ui-select-match>
@@ -244,7 +244,9 @@
                                         </small>     
                                     </ui-select-choices>
                                 </ui-select>
-                                    <a href="#" ng-show="stock.ContactNotFound" ng-click="stock.NewContact">Create new</a>
+                                    <a href="#" ng-show="stock.ContactNotFound" ng-click="stock.ContactNew = true; stock.ContactNotFound = false;">Create new</a>
+                                     <input type="text" class="form-control" ng-model="stock.ContactName" ng-show="stock.ContactNew"  placeholder="Type new customer or vendor"   ng-required="stock.ContactNew"/>
+                                    <a href="#" ng-show="stock.ContactNew"  ng-click="stock.ContactNew = false; stock.ContactNotFound = false;">Cancel new</a>
                                 </div>
 
                             </div>
@@ -262,6 +264,11 @@
                                     <div class="col-lg-10" ng-show="stock.form.StockActivityID == 10">
                                         <div class="col-lg-12">Applies warranty:</div>
                                          <input type="checkbox" ng-model="stock.form.Warranty" numeric-type="integer" numeric="true">
+                                      </div>
+                                    <div class="col-lg-10" ng-show="stock.form.StockActivityID == 40">
+                                        <div class="col-lg-12">Add Multiple:</div>
+                                         <input type="text" ng-model="stock.form.Multiple" class="form-control" ng-value="1" numeric-type="integer" numeric="true" ng-required="stock.form.StockActivityID == 40" maxlength="2" allow-pattern="[1-9][0-9]*" />
+                                       
                                       </div>
                                 </div>
                             </div>
@@ -282,8 +289,63 @@
             </div>
         </div>
     </div>
-            </div>
+
+        
+        <div id="modal-long2" tabindex="-1" data-replace="true" class="modal fade" data-backdrop="static" data-keyboard="false">
+
+                <div class="modal-dialog modal-wide-med" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" data-dismiss="modal" aria-hidden="true"
+                                class="close" skip-disable>
+                                &times;</button>
+                            <h4>Cores created</h4>
+
+                        </div>
+                        <div class="modal-body">
+                            <div class="ibox-content">
+
+                                   <div class="row">
+
+                                        <table style="width: 500px; align-content:left" class="table table-condensed table-striped table-hover table-fixed"   st-table="stock.StockMultiple"  >
+                                             <thead>
+                                                 <tr>
+                                                     <th style="width: 80%; text-align:center">Stock ID</th>
+                                                     <th style="width: 20%; text-align:center"></th>  
+                                                     
+                                                 </tr>
+                                             </thead>
+                                             <tbody style="max-height: 500px">
+                                                 <tr ng-repeat="item in stock.StockMultiple">
+                                                     <td style="width: 80%">{{item.StockNum}}</td>
+                                                     <td style="width: 20%">
+                                                       <span class="cursor" ng-click="stock.Kardex(item)" skip-disable>
+                                                           <i class="fa fa-eye" style="padding-left: 5px" skip-disable></i>&nbsp; 
+                                                       </span>
+
+                                                    </td>
+                                                 </tr>
+                                             </tbody>
+                                             <tfoot>
+                                                 <tr>
+                                                     <td colspan="9" class="text-right" style="padding-bottom: 0">
+                                                         <div st-pagination="5" st-items-by-page="30" st-template="../../Templates/pagination.html"></div>
+                                                     </td>
+                                                 </tr>
+                                             </tfoot>
+                                         </table> 
+
+                                   </div>
+                         
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
         </div>
+
+    </div>
+</div>
 
                
      </div>
