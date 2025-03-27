@@ -1,4 +1,5 @@
-﻿(function () {
+﻿
+(function () {
     //Project Controller.
     app.controller('RepairController', ['$scope', '$http', function ($scope, $http) {
         $Ex.Http = $http;

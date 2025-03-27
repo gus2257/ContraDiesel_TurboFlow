@@ -20,72 +20,56 @@
     <div class="page-content">
         <div id="Principal">
             <div class="row wrapper border-bottom white-bg">
-                <div id="Filtros">
-                    <div class="row">
+                <div class="row">
 
-                        <div class="col-lg-12; center" >
-                            <br />
-                            <br />
-                            <img src="../../images/logo.webp" style="width:200px;" />
+                    <div class="col-lg-12; center" >
+                        <br />
+                        <br />
+                        <div class="hidden-xs">
+                        <img src="../../images/logo.webp" style="width:200px;" />
 
-                            <br /> <br /> <br /> <br />
-                         </div>
+                        <br /> <br /> <br /> <br />
+                            </div>
+                        </div>
 
-                    </div>
-                    <div class="row; center">
-                           <div class="col-lg-3">&nbsp;
-                           </div>   
-                           <div class="col-lg-6">                             
-                                <div class="col-lg-4 col-md-6">
-                                       <a href="../catalogos/contact.aspx">
-                                     <img class="hover" src="../../images/menuCustomer.png" style="width:150px; height:150px"/></a><br />
-                                     <div style="font-size:15pt; color:black; padding:10px;">Customers & Vendors</div>
-                                    
-                                 </div>
-                                <%--<div class="col-lg-4 col-md-6">
-                                    <a href="menuOperations.aspx">
-                                    <img class="hover" src="../../images/menuVendor.png" style="width:150px; height:150px;" />
-                                     </a><br />
-                                    <div style="font-size:15pt; color:black; padding:10px;">Vendors</div>
-                                </div>
-                                <div class="col-lg-4 col-md-6">
-                                    <a href="menuReports.aspx">
-                                    <img class="hover" src="../../images/menuTech.png" style="width:150px; height:150px;" /></a><br />
-                                    <div style="font-size:15pt; color:black; padding:10px;">Technicians</div>
-                                </div>--%>
-                                <div class="col-lg-4 col-md-6">
-                                    <a href="menuConfig.aspx">
-                                    <img class="hover" src="../../images/menuParts.png" style="width:150px; height:150px;" /></a><br />
-                                    <div style="font-size:15pt; color:black; padding:10px;">Parts</div>
-                                </div>
-                                <div class="col-lg-4 col-md-6">
-                                    <a href="../catalogos/brandmodel.aspx">
-                                    <img class="hover" src="../../images/menuBrand.png" style="width:150px; height:150px;" /></a><br />
-                                    <div style="font-size:15pt; color:black; padding:10px;">Brand & Models</div>
-                                </div>
-                                <div class="col-lg-4 col-md-6">
-                                    <a href="../catalogos/activity.aspx">
-                                    <img class="hover" src="../../images/menuActivity.png" style="width:150px; height:150px;" /></a><br />
-                                    <div style="font-size:15pt; color:black; padding:10px;">Activities</div>
-                                </div>
-                                <div class="col-lg-4 col-md-6">
-                                    <a href="../catalogos/usuario.aspx">
-                                    <img class="hover" src="../../images/menuUsers.png" style="width:150px; height:150px;" /></a><br />
-                                    <div style="font-size:15pt; color:black; padding:10px;">Users</div>
-                                </div>
-                                <div class="col-lg-4 col-md-6">
-                                    <a href="main.aspx">
-                                    <img class="hover" src="../../images/menuBack.png" style="width:150px; height:150px;" /></a><br />
-                                    <div style="font-size:15pt; color:black; padding:10px;">Menu</div>
-                                </div>                           </div>
-                           <div class="col-lg-3">&nbsp;
-                           </div>  
-                    </div>
                 </div>
-                <div class="clearfix">
+                <div class="row; center">
+                        <div class="col-lg-3">&nbsp;
+                        </div>   
+                        <div class="col-lg-6">                             
+                            <div class="col-lg-4 col-xs-6">
+                                    <a href="../catalogos/contact.aspx">
+                                    <img class="hover" src="../../images/menuCustomer.png" style="width:150px; height:150px"/></a><br />
+                                    <div style="font-size:15pt; color:black; padding:10px;">Customers & Vendors</div>
+                             </div>
+                            <div class="col-lg-4 col-xs-6">
+                                <a href="menuConfig.aspx">
+                                <img class="hover" src="../../images/menuParts.png" style="width:150px; height:150px;" /></a><br />
+                                <div style="font-size:15pt; color:black; padding:10px;">Parts</div>
+                            </div>
+                            <div class="col-lg-4 col-xs-6">
+                                <a href="../catalogos/brandmodel.aspx">
+                                <img class="hover" src="../../images/menuBrand.png" style="width:150px; height:150px;" /></a><br />
+                                <div style="font-size:15pt; color:black; padding:10px;">Brand & Models</div>
+                            </div>
+                            <div class="col-lg-4 col-xs-6">
+                                <a href="../catalogos/activity.aspx">
+                                <img class="hover" src="../../images/menuActivity.png" style="width:150px; height:150px;" /></a><br />
+                                <div style="font-size:15pt; color:black; padding:10px;">Activities</div>
+                            </div>
+                            <div class="col-lg-4 col-xs-6">
+                                <a href="../catalogos/usuario.aspx">
+                                <img class="hover" src="../../images/menuUsers.png" style="width:150px; height:150px;" /></a><br />
+                                <div style="font-size:15pt; color:black; padding:10px;">Users</div>
+                            </div>
+                            <div class="col-lg-4 col-xs-6">
+                                <a href="main.aspx">
+                                <img class="hover" src="../../images/menuBack.png" style="width:150px; height:150px;" /></a><br />
+                                <div style="font-size:15pt; color:black; padding:10px;">Menu</div>
+                            </div>
+                        </div>
                 </div>
             </div>
-           
         </div>
     </div>
 </div>

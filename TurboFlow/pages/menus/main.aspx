@@ -21,53 +21,48 @@
     <div class="page-content">
         <div id="Principal">
             <div class="row wrapper border-bottom white-bg">
-                <div id="Filtros">
-                    <div class="row">
+                <div class="row">
 
-                        <div class="col-lg-12; center" >
-                            <br />
-                            <br />
-                            <img src="../../images/logo.webp" style="width:200px;" />
+                    <div class="col-lg-12; center" >
+                        <br />
+                        <br />
+                        <div class="hidden-xs">
+                        <img src="../../images/logo.webp" style="width:200px;" />
 
-                            <br /> <br /> <br /> <br />
-                         </div>
+                        <br /> <br /> <br /> <br />
+                            </div>
+                        </div>
 
-                    </div>
-                    <div class="row; center">
-                           <div class="col-lg-3 hidden-xs">&nbsp;
-                           </div>   
-                           <div class="col-lg-6 col-12">                             
-                                <div class="col-lg-4 col-3">
-                                       <a href="../reports/monitor.aspx">
-                                     <img class="hover" src="../../images/menuMonitor.png" style="width:150px; height:150px; object-fit:contain;"/></a><br />
-                                     <div style="font-size:15pt; color:black; padding:10px;">Monitor</div>
-                                    
-                                 </div>
-                                <div class="col-lg-4 col-3">
-                                    <a href="operations.aspx">
-                                    <img class="hover" src="../../images/menuOperations.png" style="width:150px; height:150px; object-fit:contain;" />
-                                     </a><br />
-                                    <div style="font-size:15pt; color:black; padding:10px;">Operation</div>
-                                </div>
-                                <div class="col-lg-4 col-3">
-                                    <a href="menuReports.aspx">
-                                    <img class="hover" src="../../images/menuReports.png" style="width:150px; height:150px; object-fit:contain;" /></a><br />
-                                    <div style="font-size:15pt; color:black; padding:10px;">Reports</div>
-                                </div>
-                                <div class="col-lg-4 col-3">
-                                    <a href="config.aspx">
-                                    <img class="hover" src="../../images/menuConfig.png" style="width:150px; height:150px; object-fit:contain;" /></a><br />
-                                    <div style="font-size:15pt; color:black; padding:10px;">Configuration</div>
-                                </div>
-                           </div>
-                           <div class="col-lg-3 hidden-xs">&nbsp;
-                           </div>  
-                    </div>
                 </div>
-                <div class="clearfix">
+                <div class="row; center">
+                        <div class="col-lg-3 hidden-xs">&nbsp;
+                        </div>   
+                        <div class="col-lg-6 col-xs-12">                             
+                            <div class="col-lg-4 col-xs-6">
+                                    <a href="../reports/monitor.aspx">
+                                    <img class="hover" src="../../images/menuMonitor.png" style="width:150px; height:150px; object-fit:contain;"/></a><br />
+                                    <div style="font-size:15pt; color:black; padding:10px;">Monitor</div>
+                                    
+                                </div>
+                            <div class="col-lg-4 col-xs-6">
+                                <a href="operations.aspx">
+                                <img class="hover" src="../../images/menuOperations.png" style="width:150px; height:150px; object-fit:contain;" />
+                                    </a><br />
+                                <div style="font-size:15pt; color:black; padding:10px;">Operation</div>
+                            </div>
+                            <div class="col-lg-4 col-xs-6">
+                                <a href="menuReports.aspx">
+                                <img class="hover" src="../../images/menuReports.png" style="width:150px; height:150px; object-fit:contain;" /></a><br />
+                                <div style="font-size:15pt; color:black; padding:10px;">Reports</div>
+                            </div>
+                            <div class="col-lg-4 col-xs-6">
+                                <a href="config.aspx">
+                                <img class="hover" src="../../images/menuConfig.png" style="width:150px; height:150px; object-fit:contain;" /></a><br />
+                                <div style="font-size:15pt; color:black; padding:10px;">Configuration</div>
+                            </div>
+                        </div>
                 </div>
             </div>
-           
         </div>
     </div>
 </div>

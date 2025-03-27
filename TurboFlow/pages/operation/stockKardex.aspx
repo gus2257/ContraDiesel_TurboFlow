@@ -127,8 +127,9 @@
                                                     <th style="width: 10%; text-align:center">Date</th>
                                                     <th style="width: 10%; text-align:center">Activity</th>
                                                     <th style="width: 20%; text-align:center">Customer / Vendor</th>
-                                                    <th style="width: 15%; text-align:center">Unit Ref</th>
-                                                    <th style="width: 25%; text-align:center">Notes</th>
+                                                    <th style="width: 10%; text-align:center">Unit Ref</th>
+                                                    <th style="width: 10%; text-align:center">Replace (from/to)</th>
+                                                    <th style="width: 20%; text-align:center">Notes</th>
                                                     <th style="width: 15%; text-align:center">Changed by</th>  
                                                     <th style="width: 5%; text-align:center">
                                                         <a  id="lnkAgregar" href="#">
@@ -146,14 +147,16 @@
                                                     <td style="width: 20%">
                                                         <a href="#" ng-click="stock.ShowActivities(item)" title="Show activities">{{item.Customer}}</a>
                                                      </td>
-                                                    <td style="width: 15%">{{item.UnitRef}}</td>
-                                                    <td style="width: 25%">{{item.NotesShort}}</td>
+                                                    <td style="width: 10%">{{item.UnitRef}}</td>
+                                                    <td style="width: 10%">
+                                                        <a href="StockKardex.aspx?StockID={{item.StockIDReplace}}" title="Show activities">{{item.StockReplace}}</a></td>
+                                                    <td style="width: 20%">{{item.NotesShort}}</td>
                                                     <td style="width: 15%">{{item.UserName}}</td>
                                                     <td style="width: 5%">
                                                     <span class="cursor" ng-click="stock.NewHistory(item)" skip-disable>
                                                         <i class="fa fa-eye" style="padding-left: 5px" skip-disable></i>&nbsp; 
                                                     </span>
-
+                                                        <a ng-show="item.StockActivityID == 10" href="../CreatePDF.aspx?TypePDF=1&HistoryID={{item.StockHistoryID}}" target"_blank"> <i class="fa fa-file-pdf-o" style="padding-left: 5px" skip-disable></i></a>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -244,9 +247,24 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="col-lg-10" ng-show="stock.form.StockActivityID == 10">
-                                        <div class="col-lg-12">Applies warranty:</div>
-                                         <input type="checkbox" ng-model="stock.form.Warranty" numeric-type="integer" numeric="true">
+                                        <div class="col-lg-6">
+                                            <div class="col-lg-12">Applies warranty:</div>
+                                             <input type="checkbox" ng-model="stock.form.Warranty" numeric-type="integer" numeric="true">
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="col-lg-12">Replacement:</div>
+                                             <input type="checkbox" ng-model="stock.form.Replacement" numeric-type="integer" numeric="true">
+                                        </div>
                                       </div>
+                                </div>
+                                <div class="col-lg-4" ng-hide="!stock.form.Replacement">
+                                     <div class="col-lg-12">Replace with Stock ID:</div>
+                                       <input type="text" ng-model="stock.form.StockReplace" numeric-type="integer" key-enter="stock.StockFind()" ng-readonly="stock.form.StockIDReplace != 0" numeric="true" required allow-pattern="\d+" />
+                                        <button class="btn btn-primary btn-sm m-l-sm" type="button" ng-click="stock.StockFind()" ng-hide="stock.form.StockIDReplace != 0">
+                                         <i class="fa fa-search"></i></button>
+                                        <button class="green btn btn-success btn-radius btn-sm m-l-sm" type="button" ng-click="stock.form.StockIDReplace = 0; stock.form.StockReplace = '';" ng-hide="stock.form.StockIDReplace == 0">
+                                            <i class="fa fa-check"></i></button><br />
+                                         <span style="color:red;">{{ stock.form.Message }}</span>
                                 </div>
                             </div>
                             <div class="row" ng-show="stock.form.StockActivityID != 30">

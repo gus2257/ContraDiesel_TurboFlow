@@ -31,6 +31,8 @@
        
         <div class="page-content" disable-all="stock.esSoloLectura">
             <div id="Principal">
+
+
                 <div class="row wrapper border-bottom white-bg">
                    
                         <div class="col-lg-12">
@@ -98,7 +100,7 @@
                                             <div id="tabGrouped" class="tab-pane fade in active">
                                                 <div class="row">
                                                      <table style="width: 95%;" class="col-lg-12 table table-condensed table-striped table-hover table-fixed" 
-                                                         st-table="stock.Grouped" st-safe-src="stock.Grouped">
+                                                         st-table="stock.Grouped">
                                                          <thead>
                                                              <tr>
                                                                  <th class="hidden-xs" style="width: 20%">Category</th>
@@ -129,10 +131,11 @@
                                                      </table>                                                
                                                 </div>
                                             </div>
+
                                             <div id="tabDetailed" class="tab-pane fade">
                                                 <div class="row">
                                                      <table style="width: 95%;" class="col-lg-12 table table-condensed table-striped table-hover table-fixed" 
-                                                         st-table="stock.List" st-safe-src="stock.List">
+                                                         st-table="stock.List">
                                                          <thead>
                                                              <tr>
                                                                  <th class="hidden-xs" style="width: 15%">Category</th>
@@ -180,6 +183,8 @@
 
                  </div>
                
+            </div>
+        </div>
 
         <div id="modal-long" tabindex="-1" data-replace="true" class="modal fade" data-backdrop="static" data-keyboard="false">
         <div ng-form="stock.Form" ng-class="{'submitted': stock.SetClassSummitValid()}">
@@ -195,9 +200,9 @@
                     <div class="modal-body">
                         <div class="ibox-content">
                              <div class="row">
-                                     <div class="col-lg-3">
+                                     <div class="col-lg-4">
                                      <div class="col-lg-12">Stock ID:</div>
-                                       <input type="text" ng-model="stock.form.StockNum" class="form-control" ng-value="0" numeric-type="integer" numeric="true" required allow-pattern="\d+" />
+                                       <input type="text" class="form-control" ng-model="stock.form.StockNum" class="form-control" ng-value="0" numeric-type="integer" numeric="true" required allow-pattern="\d+" />
                                          <span style="text-decoration-color:gray;">Type "0" for new stock number</span>
                                    </div>
                              </div>
@@ -275,7 +280,7 @@
                              <div class="row">
                              <div class="col-lg-12">
                                      <div class="col-lg-12">Notes:</div>
-                                       <textarea ng-model="stock.form.Notes" rows="4" cols="100"></textarea>
+                                       <textarea class="form-control" ng-model="stock.form.Notes" rows="4" cols="100"></textarea>
                                    </div>
                              </div>
                         </div>
@@ -289,8 +294,7 @@
             </div>
         </div>
     </div>
-
-        
+  
         <div id="modal-long2" tabindex="-1" data-replace="true" class="modal fade" data-backdrop="static" data-keyboard="false">
 
                 <div class="modal-dialog modal-wide-med" role="document">
@@ -344,10 +348,6 @@
 
         </div>
 
-    </div>
-</div>
-
-               
      </div>
 
     <script type="text/javascript" language="javascript" src="Stock.js?V00039"></script>

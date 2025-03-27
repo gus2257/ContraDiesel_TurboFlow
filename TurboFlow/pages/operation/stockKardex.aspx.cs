@@ -73,6 +73,7 @@ namespace WorkShop.pages.operation
                 dictionary["StockNum"] = dt.Rows[0]["StockNum"].ToString();
                 dictionary["Brand"] = dt.Rows[0]["Brand"].ToString();
                 dictionary["Model"] = dt.Rows[0]["ModelName"].ToString();
+                dictionary["ModelID"] = dt.Rows[0]["ModelID"].ToString();
                 dictionary["StockStatus"] = dt.Rows[0]["StockStatus"].ToString();
                 dictionary["LastUpdate"] = dt.Rows[0]["LastUpdate"].ToString();
 
@@ -139,6 +140,34 @@ namespace WorkShop.pages.operation
 
             return result;
         }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod]
+        public static Dictionary<string, object> StockSearch(Dictionary<string, string> datos)
+        {
+            BasePage basePage = new BasePage();
+            logic_acces logicAcces = new logic_acces(BasePage.ConexionDB);
+            Dictionary<string, object> dictionary = new Dictionary<string, object>();
+
+            DataSet ds = logicAcces.ExecuteQuery("Stock_Get", datos);
+
+            if (ds.Tables[0].Rows.Count == 1)
+            {
+                dictionary["Result"] = "OK";
+                dictionary["StockID"] = ds.Tables[0].Rows[0]["StockID"].ToString();
+                dictionary["Category"] = ds.Tables[0].Rows[0]["Category"].ToString();
+                dictionary["Brand"] = ds.Tables[0].Rows[0]["Brand"].ToString();
+                dictionary["Model"] = ds.Tables[0].Rows[0]["Model"].ToString();
+            }
+            else
+            {
+                dictionary["Result"] = "ERROR";
+                dictionary["Message"] = "Not found or model is diferent";
+            }
+
+            return dictionary;
+        }
+
 
 
         [WebMethod(EnableSession = true)]

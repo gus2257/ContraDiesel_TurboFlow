@@ -160,6 +160,7 @@
     <Content Include="images\lightbox\next.png" />
     <Content Include="images\lightbox\prev.png" />
     <Content Include="images\logo.ico" />
+    <Content Include="images\logo.png" />
     <Content Include="images\logo_blank.png" />
     <Content Include="images\menuActivity.png" />
     <Content Include="images\menuBack.png" />
@@ -254,6 +255,7 @@
     <Content Include="js\pages\catalogos\Usuario.js" />
     <Content Include="js\pages\login.js" />
     <Content Include="js\pages\menus\menu.js" />
+    <Content Include="pages\CreatePDF.aspx" />
     <Content Include="pages\operation\Repairs.js" />
     <Content Include="js\pages\operation\Stock.js" />
     <Content Include="pages\operation\StockKardex.js" />
@@ -302,6 +304,8 @@
     <Content Include="Resources\pages_menus_main_aspx.res.txt" />
     <Content Include="Resources\pages_catalogos_usuario_aspx.res.txt" />
     <Content Include="Resources\pages_reportes_dashboard_aspx.res.txt" />
+    <Content Include="Templates\RegFrom.html" />
+    <Content Include="Templates\StockReception.html" />
     <Content Include="Templates\pagination.html" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -392,6 +396,13 @@
     </Compile>
     <Compile Include="pages\Error.aspx.designer.cs">
       <DependentUpon>Error.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\CreatePDF.aspx.cs">
+      <DependentUpon>CreatePDF.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\CreatePDF.aspx.designer.cs">
+      <DependentUpon>CreatePDF.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>

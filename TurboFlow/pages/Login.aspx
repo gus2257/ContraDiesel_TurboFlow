@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../css/font-icon-awesome.min.css" />
     <link rel="stylesheet" media="screen" href="../css/bootstrap.min.css" />
     <link rel="stylesheet" media="screen" href="../css/Login.css" />
-    <link rel="icon" href="images/logo.ico" type="image/x-icon" />
+    <link rel="icon" href="../images/logo.ico" type="image/x-icon" />
 </head>
 <body class="body">
     <script type="text/javascript" src="<%=ruta %>js/jquery/jquery.js"></script>

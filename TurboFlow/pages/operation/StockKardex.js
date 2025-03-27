@@ -12,6 +12,8 @@
         stock.ContactNotFound = false;
         stock.ContactNew = false;
 
+        
+
 
         //obtener lista
         stock.StockLoad = function () {
@@ -32,6 +34,7 @@
                     stock.Category = response.d.Category;
                     stock.Brand = response.d.Brand;
                     stock.Model = response.d.Model;
+                    stock.ModelID = response.d.ModelID;
                     stock.StockNum = response.d.StockNum;
                     stock.StockStatus = response.d.StockStatus;
                     stock.LastUpdate = response.d.LastUpdate;
@@ -79,6 +82,9 @@
                 stock.form.Customer = '';
                 stock.form.StockActivityID = undefined;
                 stock.form.Warranty = false;
+                stock.form.Replacement = false;
+                stock.form.StockIDReplace = 0;
+                stock.form.StockReplace = "";
                 stock.form.Customer = '';
                 stock.form.ContactName = '';
                 stock.form.ContactPhone = '';
@@ -93,6 +99,9 @@
                 stock.form.Customer = item.Customer;
                 stock.form.StockActivityID = item.StockActivityID;
                 stock.form.Warranty = item.Warranty;
+                stock.form.StockIDReplace = item.StockIDReplace;
+                stock.form.StockReplace = item.StockReplace;
+                stock.form.Replacement = stock.form.StockIDReplace != 0;
                 stock.form.Customer = item.Customer;
                 stock.form.ContactName = item.ContactName;
                 stock.form.ContactPhone = item.ContactPhone;
@@ -200,6 +209,40 @@
             }
 
         };
+
+
+        stock.StockFind = function () {
+
+            if (stock.form.StockReplace == "") {
+                stock.form.Message = "Type Stock ID";
+                return;
+            }
+            stock.stockFind = {};
+            stock.stockFind.StockID = 0;
+            stock.stockFind.ModelID = stock.ModelID;
+            stock.stockFind.StockNum = stock.form.StockReplace;
+
+            try {
+                // Ex.load(true);
+                var callback = function (response) {
+                    // Ex.load(false);
+                    if (response.d.Result == "OK") {
+                        stock.form.StockIDReplace = response.d.StockID;
+
+                        stock.form.Message = "";
+                    } else {
+                        stock.form.Message = response.d.Message;
+                    }
+
+
+                }
+                $Ex.Execute("StockSearch", stock.stockFind, callback);
+            } catch (ex) {
+                Ex.mensajes(ex.message);
+                // Ex.load(false);
+            }
+        };
+
 
 
         stock.LoadDrops();

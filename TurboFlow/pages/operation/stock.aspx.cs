@@ -107,9 +107,12 @@ namespace WorkShop.pages.operation
                     val3.Complete();
 
                     result["Result"] = "OK";
-                    result["StockID"] = datos["StockID"];
+                    if (ds2.Tables[0].Rows.Count == 1)
+                    {
+                        result["StockID"] = ds2.Tables[0].Rows[0]["StockID"].ToString();
+                    }
 
-                    result["StockMultiple"] = (object)val.DataTableToMap(ds2.Tables[0]); ;
+                    result["StockMultiple"] = (object)val.DataTableToMap(ds2.Tables[0]);
 
 
                 }

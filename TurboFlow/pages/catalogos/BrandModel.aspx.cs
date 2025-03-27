@@ -101,10 +101,17 @@ namespace WorkShop.pages.catalogos
                 TransactionScope val3 = new TransactionScope();
                 try
                 {
+                    bool isNew = false;
+                    if (datos["BrandID"] == "0")
+                        isNew = true;
+
                     val2.ExecuteNonQuery("StockBrand_UI", datos);
 
+                 
                     for (int i = 0; i < objModels.Count; i++)
                     {
+                        if (isNew)
+                            objModels[i]["BrandID"] = datos["BrandID"];
                         val2.ExecuteNonQuery("StockModel_UI", objModels[i]);
                     }
                     
